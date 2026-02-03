@@ -91,7 +91,7 @@ export const brandConfig = {
   // ABOUT US SECTION
   // ============================================
   about: {
-    headline: "About Flawless Electric Inc",
+    headline: "Union Skill. Family Values.",
     subheadline: "Union-trained. Family-owned. Built on hard work.",
     description: "Flawless Electric Inc is owned and operated by Gonzalo Arellano, founder of Flawless Electric Inc, a union-trained electrician with years of hands-on experience in the trade. We're a union shop serving the Pacific Northwest, and we take pride in doing the job right the first time. From panel upgrades to full rewires, we bring blue-collar grit and professional-grade quality to every home we work in.",
     values: [

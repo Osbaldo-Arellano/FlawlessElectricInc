@@ -91,7 +91,7 @@ export const brandConfig = {
   // ABOUT US SECTION
   // ============================================
   about: {
-    headline: "Sobre Flawless Electric Inc",
+    headline: "Habilidad sindical. Valores familiares.",
     subheadline: "Entrenamiento sindical. Negocio familiar. Construido con trabajo duro.",
     description: "Flawless Electric Inc es propiedad y est\u00e1 operado por Gonzalo Arellano, un electricista con entrenamiento sindical y a\u00f1os de experiencia pr\u00e1ctica en el oficio. Somos una empresa sindical que sirve al noroeste del Pac\u00edfico, y nos enorgullecemos de hacer el trabajo bien desde la primera vez. Desde mejoras de paneles hasta recableados completos, llevamos la tenacidad del trabajo duro y la calidad profesional a cada hogar.",
     values: [
