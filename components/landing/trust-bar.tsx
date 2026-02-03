@@ -94,7 +94,7 @@ export function TrustBar() {
             <div className="absolute -right-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
             <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-            <p className="relative text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground/70 mb-8">
+            <p className="relative text-center text-lg font-semibold uppercase tracking-widest text-muted-foreground/70 mb-8">
               {brand.trustBar.headline}
             </p>
 
