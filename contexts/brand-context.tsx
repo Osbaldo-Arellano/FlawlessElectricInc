@@ -91,7 +91,6 @@ export interface BrandState {
     social: Array<{ platform: string; url: string }>;
     copyright: string;
   };
-  ui: Record<string, unknown>;
 }
 
 interface BrandContextType {
@@ -139,8 +138,7 @@ function getInitialState(lang: Language): BrandState {
     gallery: JSON.parse(JSON.stringify(config.gallery)),
     cta: JSON.parse(JSON.stringify(config.cta)),
     footer: JSON.parse(JSON.stringify(config.footer)),
-    ui: JSON.parse(JSON.stringify(config.ui)),
-  };
+};
 }
 
 function getHydratedState(): { lang: Language; brand: BrandState } {

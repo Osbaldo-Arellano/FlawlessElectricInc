@@ -295,11 +295,6 @@ export const brandConfig = {
     ],
     copyright: "\u00a9 2024 Flawless Electric Inc. Todos los derechos reservados.",
   },
-
-  // ============================================
-  // UI STRINGS (for translations)
-  // ============================================
-  ui: {},
 } as const;
 
 export type BrandConfig = typeof brandConfig;

@@ -67,16 +67,13 @@ export function Navbar() {
               {brand.navigation.cta.label}
             </Link>
           </Button>
-          <Link href="/login" className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" aria-label="Settings">
+          <button className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" aria-label="Settings">
             <Settings className="w-4 h-4" />
-          </Link>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-2 lg:hidden">
-          <Link href="/login" className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" aria-label="Settings">
-            <Settings className="w-4 h-4" />
-          </Link>
           <LanguageToggle />
           <ThemeToggle />
           <Button
@@ -110,12 +107,15 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <div className="flex flex-col gap-2 pt-2">
-              <Button asChild className="w-full">
+            <div className="flex items-center gap-2 pt-2">
+              <Button asChild className="flex-1">
                 <Link href={brand.navigation.cta.href}>
                   {brand.navigation.cta.label}
                 </Link>
               </Button>
+              <button className="text-muted-foreground/40 hover:text-muted-foreground transition-colors p-2" aria-label="Settings">
+                <Settings className="w-5 h-5" />
+              </button>
             </div>
           </div>
         </div>
