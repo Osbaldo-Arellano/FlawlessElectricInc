@@ -23,7 +23,7 @@ export function About() {
             <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
               {brand.about.headline}
             </h2>
-            <p className="text-lg text-muted-foreground mb-6">
+            <p className="text-lg lg:text-2xl text-muted-foreground mb-6">
               {brand.about.subheadline}
             </p>
           </div>

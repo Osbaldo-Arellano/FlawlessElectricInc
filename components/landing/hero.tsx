@@ -96,10 +96,10 @@ export function Hero() {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
-      <div ref={contentRef} className="container mx-auto px-1 lg:px-4">
-        {/* Hero Image — full width on desktop, landscape */}
+      <div ref={contentRef}>
+        {/* Hero Image — full width on all screen sizes */}
         <div className="relative">
-          <div className="relative rounded-2xl overflow-hidden shadow-2xl min-h-[480px] sm:min-h-0 sm:aspect-[4/3] lg:aspect-[21/9]">
+          <div className="relative overflow-hidden shadow-2xl min-h-[480px] sm:min-h-0 sm:aspect-[4/3] lg:aspect-[21/9]">
             {/* Background image */}
             <Image
               src={brand.assets.hero.image}
@@ -111,7 +111,7 @@ export function Hero() {
             {/* Slight darkening for text readability */}
             <div className="absolute inset-0 bg-black/20" />
             {/* Overlay content */}
-            <div className="relative z-10 flex flex-col justify-between h-full min-h-[480px] sm:min-h-0 p-4 sm:p-6 lg:p-10">
+            <div className="relative z-10 flex flex-col justify-between h-full min-h-[480px] sm:min-h-0 p-4 sm:p-6 lg:p-10 container mx-auto">
               {/* Headline - centered */}
               <div className="flex-1 flex items-center justify-start">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-white px-0 drop-shadow-lg max-w-3xl">
