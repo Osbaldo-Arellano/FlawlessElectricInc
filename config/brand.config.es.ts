@@ -84,6 +84,7 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "De confianza para los hogares del noroeste del Pac\u00edfico",
+    credentials: ["IBEW", "NECA", "Oregon CCB", "BBB Acreditado", "Energy Trust de Oregon"],
   },
 
   // ============================================

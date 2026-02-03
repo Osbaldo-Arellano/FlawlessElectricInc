@@ -84,6 +84,7 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "Trusted by homeowners across the PNW",
+    credentials: ["IBEW", "NECA", "Oregon CCB", "BBB Accredited", "Energy Trust of Oregon"],
   },
 
   // ============================================

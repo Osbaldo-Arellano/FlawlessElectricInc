@@ -217,11 +217,11 @@ export function Hero() {
             </Button>
           </div>
 
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-row flex-nowrap justify-between gap-4">
             {brand.hero.stats.map((stat) => (
-              <div key={stat.label}>
-                <div className="text-3xl font-bold">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">
+              <div key={stat.label} className="text-center">
+                <div className="text-xl font-bold">{stat.value}</div>
+                <div className="text-xs text-muted-foreground">
                   {stat.label}
                 </div>
               </div>

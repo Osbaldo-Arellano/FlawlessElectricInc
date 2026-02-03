@@ -54,6 +54,7 @@ export interface BrandState {
   };
   trustBar: {
     headline: string;
+    credentials: string[];
   };
   about: {
     headline: string;
@@ -132,7 +133,7 @@ function getInitialState(lang: Language): BrandState {
     },
     navigation: JSON.parse(JSON.stringify(config.navigation)),
     hero: JSON.parse(JSON.stringify(config.hero)),
-    trustBar: { ...config.trustBar },
+    trustBar: { ...config.trustBar, credentials: [...config.trustBar.credentials] },
     about: JSON.parse(JSON.stringify(config.about)),
     services: JSON.parse(JSON.stringify(config.services)),
     gallery: JSON.parse(JSON.stringify(config.gallery)),

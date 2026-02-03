@@ -1,84 +1,144 @@
 "use client";
 
-import Image from "next/image";
-
+import { useEffect, useRef, useState, useMemo } from "react";
 import { useBrand } from "@/contexts/brand-context";
-import { AnimateOnScroll } from "@/components/animate-on-scroll";
 
 export function TrustBar() {
   const { brand } = useBrand();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [revealedCount, setRevealedCount] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
 
-  const LogoItem = ({ logo }: { logo: { name: string; url: string } }) => (
-    <div className="flex-shrink-0 grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all px-4 lg:px-0">
-      <Image
-        src={logo.url}
-        alt={logo.name}
-        width={0}
-        height={0}
-        sizes="100vw"
-        className="w-auto h-auto"
-      />
-    </div>
+  // Build grouped structure: each credential has its own array of characters
+  const credGroups = useMemo(() => {
+    return brand.trustBar.credentials.map((cred) => {
+      const chars: { char: string; isSpace: boolean }[] = [];
+      for (const ch of cred) {
+        chars.push({ char: ch, isSpace: ch === " " });
+      }
+      return chars;
+    });
+  }, [brand.trustBar.credentials]);
+
+  const totalLetters = credGroups.reduce(
+    (sum, g) => sum + g.filter((c) => !c.isSpace).length,
+    0,
   );
+  const scrollPerLetter = 15;
+  const scrollRunway = totalLetters * scrollPerLetter;
+
+  // Measure content height so we can animate between explicit pixel values
+  useEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+    const measure = () => setContentHeight(content.offsetHeight);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(content);
+    return () => ro.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let rafId: number;
+    const onScroll = () => {
+      rafId = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        // Start revealing as soon as the section enters the viewport
+        const offset = window.innerWidth < 640 ? 150 : 100;
+        const scrolled = window.innerHeight - rect.top - offset;
+        if (scrolled < 0) {
+          setRevealedCount(0);
+          return;
+        }
+        const progress = Math.min(1, Math.max(0, scrolled / scrollRunway));
+        setRevealedCount(Math.floor(progress * totalLetters));
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, [scrollRunway, totalLetters]);
+
+  const allRevealed = revealedCount >= totalLetters;
+
+  // Map revealed count back to letter indices (skipping spaces/dividers)
+  let letterIndex = 0;
 
   return (
-    <section className="py-12 border-y border-border/40 bg-muted/30">
-      <div className="container mx-auto px-4">
-        <AnimateOnScroll animation="fade">
-          <p className="text-center text-lg text-muted-foreground mb-8">
-            {brand.trustBar.headline}
-          </p>
-        </AnimateOnScroll>
+    <section
+      ref={sectionRef}
+      className="transition-[height] duration-500 ease-in-out"
+      style={{
+        height: allRevealed ? `${contentHeight}px` : `${scrollRunway}px`,
+      }}
+    >
+      <div
+        ref={contentRef}
+        className="flex items-start pt-8"
+        style={{
+          position: allRevealed ? "relative" : "sticky",
+          top: allRevealed ? undefined : 0,
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <div className="relative max-w-4xl mx-auto rounded-2xl px-8 py-10">
+            {/* Decorative glow */}
+            <div className="absolute -right-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
 
-        {/* Desktop: centered flex wrap */}
-        <AnimateOnScroll animation="fade-up" delay={100}>
-          <div className="hidden lg:flex flex-wrap items-center justify-center gap-8 lg:gap-12">
-            {brand.assets.partnerLogos.map((logo) => (
-              <LogoItem key={logo.name} logo={logo} />
-            ))}
-          </div>
-        </AnimateOnScroll>
+            <p className="relative text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground/70 mb-8">
+              {brand.trustBar.headline}
+            </p>
 
-        {/* Mobile: infinite horizontal scroll */}
-        <div className="lg:hidden overflow-hidden">
-          <div
-            className="flex items-center gap-12"
-            style={{
-              width: "max-content",
-              animation: "marquee 20s linear infinite",
-            }}
-          >
-            {/* Duplicate logos for seamless loop */}
-            {[...brand.assets.partnerLogos, ...brand.assets.partnerLogos].map(
-              (logo, index) => (
-                <div
-                  key={`${logo.name}-${index}`}
-                  className="flex-shrink-0 grayscale opacity-60 relative"
-                  style={{ width: "100px", height: "200px" }}
-                >
-                  <Image
-                    src={logo.url}
-                    alt={logo.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              )
-            )}
+            <div className="relative flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-y-2 sm:gap-y-2 text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
+              {credGroups.map((group, gi) => {
+                const isLast = gi === credGroups.length - 1;
+                return (
+                  <span
+                    key={gi}
+                    className={`flex items-center ${isLast ? "text-2xl sm:text-5xl lg:text-6xl -order-1 sm:order-none" : ""}`}
+                  >
+                    {gi > 0 && (
+                      <span className="hidden sm:inline text-muted-foreground/20 mx-1 sm:mx-2">
+                        ·
+                      </span>
+                    )}
+                    {group.map((c, ci) => {
+                      if (c.isSpace) {
+                        return (
+                          <span key={ci} className="inline-block w-[0.3em]" />
+                        );
+                      }
+                      const isRevealed = letterIndex < revealedCount;
+                      letterIndex++;
+                      return (
+                        <span
+                          key={ci}
+                          className={`inline-block transition-all duration-150 ${
+                            isRevealed
+                              ? "text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]"
+                              : "text-muted-foreground/20"
+                          }`}
+                        >
+                          {c.char}
+                        </span>
+                      );
+                    })}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-      `}</style>
     </section>
   );
 }
