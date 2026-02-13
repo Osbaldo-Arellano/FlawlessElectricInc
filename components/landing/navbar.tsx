@@ -31,19 +31,19 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="container mx-auto flex h-24 items-center justify-between px-4 relative">
         {/* Logo */}
-        {/* <Link href="/" className="z-10">
+        <Link href="/" className="z-10">
           {logoSrc ? (
             <Image
               src={logoSrc}
               alt={brand.company.name}
               width={200}
               height={112}
-              className="h-25 lg:h-25 w-auto object-contain"
+              className="h-25 lg:h-80 w-auto object-contain m-0 p-0"
             />
           ) : (
             <span className="text-xl font-bold">{brand.company.name}</span>
           )}
-        </Link> */}
+        </Link>
 
         {/* Desktop Navigation - Absolutely centered */}
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">

@@ -114,12 +114,15 @@ export function Hero() {
           {/* Overlay content */}
           <div className="relative z-10 flex flex-col justify-between h-full p-4 sm:p-6 lg:p-10 container mx-auto">
             {/* Logo + Headline */}
-            <div ref={mobileLogoRef} className="flex-1 flex flex-col items-start justify-center gap-2 lg:gap-3">
+            <div
+              ref={mobileLogoRef}
+              className="flex-1 flex flex-col items-start justify-center gap-2 lg:gap-3"
+            >
               <Image
                 src="/Artboard 3.svg"
                 alt={brand.company.name}
-                width={300}
-                height={300}
+                width={800}
+                height={800}
                 className="w-auto h-20 sm:h-24 lg:h-28 xl:h-100 drop-shadow-lg"
                 priority
               />
