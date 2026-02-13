@@ -8,7 +8,7 @@ export const brandConfig = {
     description: "Residential electrical services you can trust. Union-trained craftsmanship serving the Pacific Northwest with honest, reliable work.",
     email: "info@flawlesselectric.com",
     phone: "+1 (503) 555-0172",
-    address: "Portland, OR — Serving the Pacific Northwest",
+    address: "Oregon Licensed",
   },
 
   // ============================================
