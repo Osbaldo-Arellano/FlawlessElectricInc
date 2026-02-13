@@ -81,9 +81,7 @@ export function Navbar() {
         {/* Glass background */}
         <div
           className={`absolute inset-0 transition-all duration-500 ${
-            scrolled
-              ? "bg-background/70 backdrop-blur-2xl"
-              : "bg-transparent"
+            scrolled ? "bg-background/70 backdrop-blur-2xl" : "bg-transparent"
           }`}
         />
         {/* Grain texture (matching hero) */}
@@ -108,7 +106,7 @@ export function Navbar() {
         {/* ── Logo ── */}
         <Link
           href="/"
-          className="z-10 group/logo"
+          className="z-10 group/logo hidden lg:block"
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? "translateX(0)" : "translateX(-20px)",
@@ -145,8 +143,7 @@ export function Navbar() {
         >
           <div className="flex items-center gap-0.5 rounded-full bg-muted/40 backdrop-blur-md border border-border/30 px-1.5 py-1.5">
             {brand.navigation.links.map((link, i) => {
-              const isActive =
-                activeSection === link.href.replace("#", "");
+              const isActive = activeSection === link.href.replace("#", "");
               return (
                 <Link
                   key={link.href}
@@ -174,9 +171,7 @@ export function Navbar() {
                     {/* Active indicator dot */}
                     <span
                       className={`w-1 h-1 rounded-full bg-primary transition-all duration-300 ${
-                        isActive
-                          ? "opacity-100 scale-100"
-                          : "opacity-0 scale-0"
+                        isActive ? "opacity-100 scale-100" : "opacity-0 scale-0"
                       }`}
                     />
                     {link.label}
@@ -203,10 +198,7 @@ export function Navbar() {
           <div className="relative group/cta">
             {/* Glow behind button */}
             <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/40 via-primary/20 to-primary/40 opacity-0 group-hover/cta:opacity-100 blur-md transition-opacity duration-500 pointer-events-none" />
-            <Button
-              className="relative overflow-hidden"
-              asChild
-            >
+            <Button className="relative overflow-hidden" asChild>
               <Link href={brand.navigation.cta.href}>
                 <span className="relative z-10 flex items-center gap-2">
                   {brand.navigation.cta.label}
@@ -293,9 +285,7 @@ export function Navbar() {
       {/* ─── Mobile Menu — Glassmorphism ─── */}
       <div
         className={`lg:hidden absolute top-full left-0 right-0 z-50 overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          mobileMenuOpen
-            ? "max-h-[500px] opacity-100"
-            : "max-h-0 opacity-0"
+          mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-background/90 backdrop-blur-xl border-b border-border/40 shadow-xl rounded-b-2xl">

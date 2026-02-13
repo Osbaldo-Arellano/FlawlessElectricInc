@@ -231,7 +231,7 @@ export function Hero() {
                   alt={brand.company.name}
                   width={800}
                   height={800}
-                  className="w-auto h-20 sm:h-24 lg:h-28 xl:h-100 drop-shadow-lg"
+                  className="w-auto h-32 sm:h-36 lg:h-28 xl:h-100 drop-shadow-lg"
                   priority
                 />
               </div>
