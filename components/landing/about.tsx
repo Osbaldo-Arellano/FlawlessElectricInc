@@ -11,7 +11,7 @@ export function About() {
   const { brand } = useBrand();
 
   return (
-    <section id="about" className="relative overflow-hidden py-20 lg:py-32">
+    <section id="about" className="scroll-mt-28 relative overflow-hidden py-20 lg:py-32">
       {/* Decorative glows */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />

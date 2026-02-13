@@ -75,7 +75,7 @@ export interface BrandState {
       videos: string;
     };
     items: Array<{ image: string; title: string; category: string }>;
-    videos: Array<{ thumbnail: string; videoUrl: string; title: string; category: string }>;
+    videos: Array<{ videoUrl: string; title: string; category: string }>;
   };
   cta: {
     headline: string;

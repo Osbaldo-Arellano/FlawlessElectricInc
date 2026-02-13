@@ -27,7 +27,7 @@ export function Services() {
   const { brand } = useBrand();
 
   return (
-    <section id="services" className="py-20 lg:py-32">
+    <section id="services" className="scroll-mt-28 py-20 lg:py-32">
       <div className="container mx-auto px-4">
         {/* Header */}
         <AnimateOnScroll animation="fade-up">

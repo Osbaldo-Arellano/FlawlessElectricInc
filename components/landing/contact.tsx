@@ -27,7 +27,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 bg-muted/50 dark:bg-muted/20">
+    <section id="contact" className="scroll-mt-28 py-20 lg:py-32 bg-muted/50 dark:bg-muted/20">
       <div className="container mx-auto px-4">
         <AnimateOnScroll animation="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-16">

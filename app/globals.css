@@ -119,7 +119,10 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html,
+  html {
+    @apply overflow-x-hidden;
+    scroll-behavior: smooth;
+  }
   body {
     @apply overflow-x-hidden;
   }
