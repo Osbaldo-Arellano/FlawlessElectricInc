@@ -168,3 +168,34 @@
 .hero-light-sweep-slow {
   animation: hero-light-sweep 13s ease-in-out 4s infinite;
 }
+
+/* ─── Navbar: shimmer border ─── */
+@keyframes navbar-shimmer {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.navbar-shimmer-border {
+  animation: navbar-shimmer 3s linear infinite;
+}
+
+/* ─── Navbar: pulsing accent dot ─── */
+@keyframes navbar-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.4);
+  }
+}
+
+.navbar-pulse-dot {
+  animation: navbar-pulse 2s ease-in-out infinite;
+}
