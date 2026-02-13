@@ -16,8 +16,8 @@ export const brandConfig = {
   // ============================================
   assets: {
     logo: {
-      light: "/logo.png",
-      dark: "/logo.png",
+      light: "/newlogo.png",
+      dark: "/newlogo.png",
       favicon: "/favicon.ico",
     },
     hero: {

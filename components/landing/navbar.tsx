@@ -29,21 +29,21 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4 relative">
+      <nav className="container mx-auto flex h-24 items-center justify-between px-4 relative">
         {/* Logo */}
-        <Link href="/" className="z-10">
+        {/* <Link href="/" className="z-10">
           {logoSrc ? (
             <Image
               src={logoSrc}
               alt={brand.company.name}
               width={200}
-              height={300}
-              className="h-50 w-80 object-contain"
+              height={112}
+              className="h-25 lg:h-25 w-auto object-contain"
             />
           ) : (
             <span className="text-xl font-bold">{brand.company.name}</span>
           )}
-        </Link>
+        </Link> */}
 
         {/* Desktop Navigation - Absolutely centered */}
         <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
@@ -59,7 +59,7 @@ export function Navbar() {
         </div>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center gap-4 z-10">
+        <div className="hidden lg:flex items-center gap-4 z-10 ml-auto">
           <LanguageToggle />
           <ThemeToggle />
           <Button asChild>
@@ -67,13 +67,16 @@ export function Navbar() {
               {brand.navigation.cta.label}
             </Link>
           </Button>
-          <button className="text-muted-foreground/40 hover:text-muted-foreground transition-colors" aria-label="Settings">
+          <button
+            className="text-muted-foreground/40 hover:text-muted-foreground transition-colors"
+            aria-label="Settings"
+          >
             <Settings className="w-4 h-4" />
           </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 lg:hidden">
+        <div className="flex items-center gap-2 lg:hidden ml-auto">
           <LanguageToggle />
           <ThemeToggle />
           <Button
@@ -96,7 +99,7 @@ export function Navbar() {
         className={`lg:hidden absolute top-full left-0 right-0 z-50 overflow-hidden rounded-b-2xl bg-background border-b border-border/40 shadow-lg transition-all duration-300 ease-in-out ${mobileMenuOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 border-b-0"}`}
       >
         <div className="border-t border-border">
-          <div className="container mx-auto px-4 py-4 space-y-4">
+          <div className="container mx-auto px-4 pt-[5px] pb-4 space-y-4">
             {brand.navigation.links.map((link) => (
               <Link
                 key={link.href}
@@ -113,7 +116,10 @@ export function Navbar() {
                   {brand.navigation.cta.label}
                 </Link>
               </Button>
-              <button className="text-muted-foreground/40 hover:text-muted-foreground transition-colors p-2" aria-label="Settings">
+              <button
+                className="text-muted-foreground/40 hover:text-muted-foreground transition-colors p-2"
+                aria-label="Settings"
+              >
                 <Settings className="w-5 h-5" />
               </button>
             </div>
