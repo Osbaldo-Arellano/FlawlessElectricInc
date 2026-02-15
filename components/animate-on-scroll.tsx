@@ -17,6 +17,7 @@ interface AnimateOnScrollProps {
   className?: string;
   delay?: number;
   threshold?: number;
+  triggerOnce?: boolean;
   as?: ElementType;
 }
 
@@ -69,9 +70,10 @@ export function AnimateOnScroll({
   className,
   delay = 0,
   threshold = 0.1,
+  triggerOnce = true,
   as: Component = "div",
 }: AnimateOnScrollProps) {
-  const { ref, isInView } = useInView<HTMLDivElement>({ threshold });
+  const { ref, isInView } = useInView<HTMLDivElement>({ threshold, triggerOnce });
 
   return (
     <Component

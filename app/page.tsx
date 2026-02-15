@@ -18,8 +18,11 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <About />
+        <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <Services />
+        <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <Gallery />
+        <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <Contact />
       </main>
       <Footer />

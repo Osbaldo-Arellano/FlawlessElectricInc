@@ -85,7 +85,8 @@ export function Hero() {
 
         const marginV = isMobile ? 0 : 40;
         const extraPad = isMobile ? (1 - progress) * 16 : (1 - progress) * 40;
-        section.style.minHeight = `${(1 - progress) * (vh - 64 - marginV)}px`;
+        const sectionH = (1 - progress) * (vh - 64 - marginV);
+        section.style.minHeight = `${sectionH}px`;
         section.style.paddingTop = isMobile ? "0px" : `${extraPad + 16}px`;
         section.style.paddingBottom = `${extraPad + 16}px`;
         section.style.justifyContent = isMobile ? "flex-start" : "center";
@@ -102,10 +103,16 @@ export function Hero() {
           card.style.overflow = "hidden";
         }
 
+        // Keep logo + headline visible on desktop, only fade on mobile
         const logo = mobileLogoRef.current;
         if (logo) {
-          logo.style.opacity = `${1 - progress * 2}`;
-          logo.style.transform = `translateY(${progress * -10}px)`;
+          if (isMobile) {
+            logo.style.opacity = `${1 - progress * 2}`;
+            logo.style.transform = `translateY(${progress * -10}px)`;
+          } else {
+            logo.style.opacity = "1";
+            logo.style.transform = "none";
+          }
         }
 
         [scrollHintMobileRef.current, scrollHintDesktopRef.current].forEach(
@@ -149,10 +156,10 @@ export function Hero() {
       {/* ─── Hero Card ─── */}
       <div
         ref={cardRef}
-        className="relative shadow-2xl will-change-transform"
+        className="relative lg:flex-1 lg:flex lg:flex-col shadow-2xl will-change-transform"
         style={{ transformOrigin: "center center" }}
       >
-        <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-[21/9] overflow-hidden">
+        <div className="relative aspect-[3/4] sm:aspect-[4/3] lg:aspect-auto lg:flex-1 overflow-hidden">
           {/* Background image — parallax-tracked on desktop */}
           <div
             ref={imageRef}
@@ -210,7 +217,7 @@ export function Hero() {
           )}
 
           {/* ── Overlay content ── */}
-          <div className="relative z-10 flex flex-col justify-between h-full p-4 sm:p-6 lg:p-10 container mx-auto">
+          <div className="relative z-10 flex flex-col justify-between h-full p-4 sm:p-6 lg:p-8 container mx-auto">
             {/* Logo + Headline */}
             <div
               ref={mobileLogoRef}
@@ -231,7 +238,7 @@ export function Hero() {
                   alt={brand.company.name}
                   width={800}
                   height={800}
-                  className="w-auto h-32 sm:h-36 lg:h-28 xl:h-100 drop-shadow-lg"
+                  className="w-auto h-32 sm:h-36 lg:h-24 xl:h-32 drop-shadow-lg"
                   priority
                 />
               </div>
@@ -272,7 +279,7 @@ export function Hero() {
             </div>
 
             {/* ── Bottom row: CTAs + Stats | Overlay Card ── */}
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+            <div className="flex flex-col lg:flex-row 2xl:flex-col lg:items-end 2xl:items-start lg:justify-between gap-6">
               {/* Desktop CTAs + Stats */}
               <div className="hidden lg:flex flex-col gap-6">
                 {/* CTA Buttons */}
@@ -342,7 +349,7 @@ export function Hero() {
 
               {/* ── Overlay Card (glassmorphism upgrade) ── */}
               <div
-                className="self-end max-w-xs sm:max-w-sm lg:max-w-md transition-all duration-1000 ease-out"
+                className="self-end 2xl:self-start max-w-xs sm:max-w-sm lg:max-w-md 2xl:max-w-2xl transition-all duration-1000 ease-out"
                 style={{
                   opacity: mounted ? 1 : 0,
                   transform: mounted
@@ -351,7 +358,7 @@ export function Hero() {
                   transitionDelay: "800ms",
                 }}
               >
-                <div className="relative bg-white/[0.07] backdrop-blur-xl border border-white/[0.1] rounded-xl p-5 space-y-4 overflow-hidden group/card hover:border-white/[0.18] transition-colors duration-500">
+                <div className="relative bg-white/[0.07] backdrop-blur-xl border border-white/[0.1] rounded-xl p-5 2xl:p-7 space-y-4 overflow-hidden group/card hover:border-white/[0.18] transition-colors duration-500">
                   {/* Animated corner glow on hover */}
                   <div className="absolute -top-12 -right-12 w-24 h-24 bg-white/10 rounded-full blur-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -364,7 +371,7 @@ export function Hero() {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-white/80 leading-relaxed relative">
+                  <p className="text-sm 2xl:text-base text-white/80 leading-relaxed relative">
                     {brand.hero.overlayCard.description}
                   </p>
 
@@ -374,7 +381,7 @@ export function Hero() {
                       <Link
                         key={btn.href}
                         href={btn.href}
-                        className="group/link inline-flex items-center gap-1.5 px-4 py-2 text-xs font-medium text-white border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+                        className="group/link inline-flex items-center gap-1.5 px-4 2xl:px-5 py-2 2xl:py-2.5 text-xs 2xl:text-sm font-medium text-white border border-white/20 rounded-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300"
                       >
                         {btn.label}
                         <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/link:translate-x-0.5" />
@@ -467,7 +474,7 @@ export function Hero() {
       {/* ─── Desktop Scroll Hint ─── */}
       <div
         ref={scrollHintDesktopRef}
-        className="hidden lg:flex flex-col items-center justify-center gap-3 mt-8 w-full"
+        className="hidden lg:flex flex-col items-center justify-center gap-2 mt-4 w-full shrink-0"
       >
         <span className="text-[11px] font-medium tracking-[0.25em] uppercase text-muted-foreground/70">
           {brand.hero.scrollHint}

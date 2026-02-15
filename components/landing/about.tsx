@@ -21,7 +21,7 @@ export function About() {
 
       <div className="container relative mx-auto px-4">
         {/* Header */}
-        <AnimateOnScroll animation="fade-up">
+        <AnimateOnScroll animation="fade-up" triggerOnce={false}>
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
               {brand.about.headline}
@@ -33,9 +33,9 @@ export function About() {
         </AnimateOnScroll>
 
         {/* Team photos */}
-        <AnimateOnScroll animation="fade-up">
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
-            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+        <AnimateOnScroll animation="fade-up" triggerOnce={false}>
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16 md:h-[400px] lg:h-[450px] -mx-4 md:mx-0">
+            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10">
               <Image
                 src="/jobs/electrician-commercial-wire-pull.jpg"
                 alt="Electrician pulling commercial wire"
@@ -44,7 +44,7 @@ export function About() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10">
               <Image
                 src="/jobs/fully-stocked-work-van.jpg"
                 alt="Fully stocked electrician work van"
@@ -53,7 +53,7 @@ export function About() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="hidden md:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+            <div className="hidden md:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10">
               <Image
                 src="/jobs/electrician-on-site.png"
                 alt="Electrician measuring on site"
@@ -62,7 +62,7 @@ export function About() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="md:col-span-2 rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4] md:aspect-auto">
+            <div className="md:col-span-2 rounded-none md:rounded-xl overflow-hidden border-y md:border border-black/[0.06] dark:border-white/10 aspect-[3/2] md:aspect-auto">
               <Image
                 src="/jobs/service-mast-rooftop-install.png"
                 alt="Electrician installing service mast on rooftop"
@@ -75,10 +75,10 @@ export function About() {
         </AnimateOnScroll>
 
         {/* Description + Shop Photo */}
-        <AnimateOnScroll animation="fade-up">
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
+        <AnimateOnScroll animation="fade-up" triggerOnce={false}>
+          <div className="grid lg:grid-cols-2 gap-8 mb-16 mt-2.5 lg:mt-0 -mx-4 md:mx-0">
             {/* Quote Box */}
-            <div className="relative p-8 lg:p-10 bg-white/5 backdrop-blur-md rounded-2xl">
+            <div className="relative p-8 lg:p-10 mx-4 md:mx-0 bg-white/5 backdrop-blur-md rounded-2xl">
               <span className="absolute top-4 left-6 text-6xl lg:text-9xl font-serif text-primary/20 leading-none select-none">
                 &ldquo;
               </span>
@@ -91,7 +91,7 @@ export function About() {
             </div>
 
             {/* Shop Photo */}
-            <div className="relative rounded-2xl overflow-hidden border border-black/[0.06] dark:border-white/10 min-h-[300px] lg:min-h-0">
+            <div className="relative rounded-none md:rounded-2xl overflow-hidden border-y md:border border-black/[0.06] dark:border-white/10 min-h-[300px] lg:min-h-0">
               <Image
                 src="/suburb.jpg"
                 alt="Flawless Electric Inc shop"
@@ -102,24 +102,43 @@ export function About() {
           </div>
         </AnimateOnScroll>
 
-        {/* Values Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
+        {/* Values */}
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-center gap-0 lg:gap-0">
           {brand.about.values.map((value, index) => {
-            const Icon = iconMap[index] || Target;
+            const num = String(index + 1).padStart(2, "0");
+            const isLast = index === brand.about.values.length - 1;
             return (
               <AnimateOnScroll
                 key={value.title}
                 animation="fade-up"
-                delay={index * 100}
+                delay={index * 120}
               >
-                <div className="text-center h-full p-6 bg-white/5 backdrop-blur-md border border-black/[0.06] dark:border-white/10 rounded-2xl">
-                  <div className="mb-4">
-                    <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-8 h-8 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold">{value.title}</h3>
+                <div className="group relative flex items-start gap-5 lg:flex-col lg:items-center lg:text-center px-4 lg:px-10 py-8 lg:py-0">
+                  {/* Vertical connector line (mobile) */}
+                  {!isLast && (
+                    <div className="absolute left-[2.35rem] top-[4.5rem] bottom-0 w-px bg-gradient-to-b from-primary/20 to-transparent lg:hidden" />
+                  )}
+                  {/* Horizontal connector line (desktop) */}
+                  {!isLast && (
+                    <div className="absolute right-0 top-1/2 hidden lg:block w-px h-12 -translate-y-1/2 bg-gradient-to-b from-transparent via-border to-transparent" />
+                  )}
+
+                  {/* Number */}
+                  <div className="relative shrink-0">
+                    <span className="text-6xl lg:text-8xl font-black tracking-tighter bg-gradient-to-b from-primary/25 to-primary/5 bg-clip-text text-transparent select-none leading-none">
+                      {num}
+                    </span>
                   </div>
-                  <p className="text-muted-foreground">{value.description}</p>
+
+                  {/* Content */}
+                  <div className="pt-2 lg:pt-4 lg:max-w-xs">
+                    <h3 className="text-lg lg:text-xl font-semibold mb-2">
+                      {value.title}
+                    </h3>
+                    <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
                 </div>
               </AnimateOnScroll>
             );

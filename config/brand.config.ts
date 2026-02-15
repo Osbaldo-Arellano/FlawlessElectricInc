@@ -4,8 +4,8 @@ export const brandConfig = {
   // ============================================
   company: {
     name: "Flawless Electric Inc",
-    tagline: "Union-trained. Built to last.",
-    description: "Residential electrical services you can trust. Union-trained craftsmanship serving the Pacific Northwest with honest, reliable work.",
+    tagline: "Veteran-owned. Union-trained. Built to last.",
+    description: "Residential electrical services you can trust. Veteran-owned, union-trained craftsmanship serving the Pacific Northwest with honest, reliable work.",
     email: "info@flawlesselectric.com",
     phone: "+1 (503) 555-0172",
     address: "Oregon Licensed",
@@ -64,9 +64,9 @@ export const brandConfig = {
       href: "#gallery",
     },
     stats: [
+      { value: "Veteran", label: "Owned" },
       { value: "IBEW", label: "Union Trained" },
       { value: "1000+", label: "Jobs Completed" },
-      { value: "Licensed", label: "& Bonded" },
     ],
     scrollHint: "Scroll down",
     overlayCard: {
@@ -84,20 +84,20 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "Trusted by homeowners across the PNW",
-    credentials: ["IBEW", "NECA", "Oregon CCB", "BBB Accredited", "Energy Trust of Oregon"],
+    credentials: ["Veteran Owned", "IBEW", "NECA", "Oregon CCB", "BBB Accredited", "Energy Trust of Oregon"],
   },
 
   // ============================================
   // ABOUT US SECTION
   // ============================================
   about: {
-    headline: "Union Skill. Family Values.",
-    subheadline: "Union-trained. Family-owned. Built on hard work.",
-    description: "Flawless Electric Inc is owned and operated by Gonzalo Arellano, founder of Flawless Electric Inc, a union-trained electrician with years of hands-on experience in the trade. We're a union shop serving the Pacific Northwest, and we take pride in doing the job right the first time. From panel upgrades to full rewires, we bring blue-collar grit and professional-grade quality to every home we work in.",
+    headline: "Veteran-Owned. Union Skill. Family Values.",
+    subheadline: "Veteran-owned. Union-trained. Family-operated. Built on hard work.",
+    description: "Flawless Electric Inc is owned and operated by Gonzalo Arellano, a proud veteran and union-trained electrician with years of hands-on experience in the trade. The discipline and work ethic learned through military service carry into every job we do. We're a veteran-owned, union shop serving the Pacific Northwest, and we take pride in doing the job right the first time. From panel upgrades to full rewires, we bring blue-collar grit and professional-grade quality to every home we work in.",
     values: [
       {
         title: "Our Mission",
-        description: "To provide safe, reliable, and code-compliant electrical work for homeowners at a fair price — no cutting corners.",
+        description: "To provide safe, reliable, and code-compliant electrical work for homeowners at a fair price. We don't cut corners. Ever.",
       },
       {
         title: "Union Craftsmanship",
@@ -221,7 +221,7 @@ export const brandConfig = {
   // ============================================
   cta: {
     headline: "Need Electrical Work Done Right?",
-    subheadline: "Get a free estimate from a union-trained electrician. We serve homeowners across the Pacific Northwest.",
+    subheadline: "Get a free estimate from a veteran-owned, union-trained electrical company. We serve homeowners across the Pacific Northwest.",
     primaryCta: {
       label: "Request a Free Estimate",
       href: "#contact",
@@ -236,7 +236,7 @@ export const brandConfig = {
   // FOOTER
   // ============================================
   footer: {
-    description: "Union-trained residential electrical services serving the Pacific Northwest.",
+    description: "Veteran-owned, union-trained residential electrical services serving the Pacific Northwest.",
     columns: [
       {
         title: "Navigation",

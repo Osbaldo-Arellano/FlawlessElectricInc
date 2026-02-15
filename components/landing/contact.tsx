@@ -31,10 +31,10 @@ export function Contact() {
       <div className="container mx-auto px-4">
         <AnimateOnScroll animation="fade-up">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
               {brand.cta.headline}
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg lg:text-2xl text-muted-foreground">
               {brand.cta.subheadline}
             </p>
           </div>

@@ -12,10 +12,10 @@ export function CTASection() {
     <section className="py-20 lg:py-32 bg-primary text-primary-foreground">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+          <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
             {brand.cta.headline}
           </h2>
-          <p className="text-lg opacity-90 mb-8">
+          <p className="text-lg lg:text-2xl opacity-90 mb-8">
             {brand.cta.subheadline}
           </p>
 

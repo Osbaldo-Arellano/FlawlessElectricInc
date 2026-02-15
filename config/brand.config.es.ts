@@ -4,8 +4,8 @@ export const brandConfig = {
   // ============================================
   company: {
     name: "Flawless Electric Inc",
-    tagline: "Entrenamiento sindical. Hecho para durar.",
-    description: "Servicios el\u00e9ctricos residenciales de confianza. Trabajo sindical profesional al servicio del noroeste del Pac\u00edfico, con honestidad y calidad.",
+    tagline: "Propiedad de veterano. Entrenamiento sindical. Hecho para durar.",
+    description: "Servicios eléctricos residenciales de confianza. Propiedad de veterano, trabajo sindical profesional al servicio del noroeste del Pacífico, con honestidad y calidad.",
     email: "info@flawlesselectric.com",
     phone: "+1 (503) 555-0172",
     address: "Portland, OR \u2014 Sirviendo al Noroeste del Pac\u00edfico",
@@ -64,9 +64,9 @@ export const brandConfig = {
       href: "#gallery",
     },
     stats: [
+      { value: "Veterano", label: "Propietario" },
       { value: "IBEW", label: "Entrenamiento Sindical" },
       { value: "1000+", label: "Trabajos Completados" },
-      { value: "Licenciado", label: "y Asegurado" },
     ],
     scrollHint: "Desliza hacia abajo para más",
     overlayCard: {
@@ -84,16 +84,16 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "De confianza para los hogares del noroeste del Pac\u00edfico",
-    credentials: ["IBEW", "NECA", "Oregon CCB", "BBB Acreditado", "Energy Trust de Oregon"],
+    credentials: ["Propiedad de Veterano", "IBEW", "NECA", "Oregon CCB", "BBB Acreditado", "Energy Trust de Oregon"],
   },
 
   // ============================================
   // ABOUT US SECTION
   // ============================================
   about: {
-    headline: "Habilidad sindical. Valores familiares.",
-    subheadline: "Entrenamiento sindical. Negocio familiar. Construido con trabajo duro.",
-    description: "Flawless Electric Inc es propiedad y est\u00e1 operado por Gonzalo Arellano, un electricista con entrenamiento sindical y a\u00f1os de experiencia pr\u00e1ctica en el oficio. Somos una empresa sindical que sirve al noroeste del Pac\u00edfico, y nos enorgullecemos de hacer el trabajo bien desde la primera vez. Desde mejoras de paneles hasta recableados completos, llevamos la tenacidad del trabajo duro y la calidad profesional a cada hogar.",
+    headline: "Propiedad de Veterano. Habilidad Sindical. Valores Familiares.",
+    subheadline: "Propiedad de veterano. Entrenamiento sindical. Negocio familiar. Construido con trabajo duro.",
+    description: "Flawless Electric Inc es propiedad y está operado por Gonzalo Arellano, un orgulloso veterano y electricista con entrenamiento sindical y años de experiencia práctica en el oficio. La disciplina y ética de trabajo aprendidas en el servicio militar se reflejan en cada trabajo que hacemos. Somos una empresa de veterano con entrenamiento sindical que sirve al noroeste del Pacífico, y nos enorgullecemos de hacer el trabajo bien desde la primera vez. Desde mejoras de paneles hasta recableados completos, llevamos la tenacidad del trabajo duro y la calidad profesional a cada hogar.",
     values: [
       {
         title: "Nuestra Misi\u00f3n",
@@ -221,7 +221,7 @@ export const brandConfig = {
   // ============================================
   cta: {
     headline: "\u00bfNecesitas Trabajo El\u00e9ctrico Bien Hecho?",
-    subheadline: "Obt\u00e9n una cotizaci\u00f3n gratis de un electricista con entrenamiento sindical. Servimos a hogares en todo el noroeste del Pac\u00edfico.",
+    subheadline: "Obtén una cotización gratis de una empresa eléctrica de veterano con entrenamiento sindical. Servimos a hogares en todo el noroeste del Pacífico.",
     primaryCta: {
       label: "Solicitar Cotizaci\u00f3n Gratis",
       href: "#contact",
@@ -236,7 +236,7 @@ export const brandConfig = {
   // FOOTER
   // ============================================
   footer: {
-    description: "Servicios el\u00e9ctricos residenciales con entrenamiento sindical sirviendo al noroeste del Pac\u00edfico.",
+    description: "Servicios eléctricos residenciales de veterano con entrenamiento sindical sirviendo al noroeste del Pacífico.",
     columns: [
       {
         title: "Navegaci\u00f3n",

@@ -166,19 +166,22 @@ export function GallerySwitcher() {
     <>
       <div id="gallery" className="scroll-mt-65 md:scroll-mt-100" />
 
-      <section className="py-20 lg:py-32 bg-muted/30">
-        <div className="container mx-auto px-4">
+      <section className="relative overflow-hidden py-20 lg:py-32 bg-muted/30">
+        {/* Decorative glows */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="container relative mx-auto px-4">
+          <AnimateOnScroll animation="fade-up" triggerOnce={false}>
           {/* Header */}
-          <AnimateOnScroll animation="fade-up">
-            <div className="text-center max-w-3xl mx-auto mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                {brand.gallery.headline}
-              </h2>
-              <p className="text-lg text-muted-foreground">
-                {brand.gallery.subheadline}
-              </p>
-            </div>
-          </AnimateOnScroll>
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
+              {brand.gallery.headline}
+            </h2>
+            <p className="text-lg lg:text-2xl text-muted-foreground">
+              {brand.gallery.subheadline}
+            </p>
+          </div>
 
           {/* Tab Switcher */}
           {hasVideos && (
@@ -235,6 +238,7 @@ export function GallerySwitcher() {
                     key={`${page}-${index}`}
                     animation="fade-up"
                     delay={index * 75}
+                    triggerOnce={false}
                   >
                     <button
                       type="button"
@@ -295,6 +299,7 @@ export function GallerySwitcher() {
           ) : (
             <VideoGallery />
           )}
+          </AnimateOnScroll>
         </div>
       </section>
     </>
