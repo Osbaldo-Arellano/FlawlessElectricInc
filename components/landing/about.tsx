@@ -11,7 +11,10 @@ export function About() {
   const { brand } = useBrand();
 
   return (
-    <section id="about" className="scroll-mt-28 relative overflow-hidden py-20 lg:py-32">
+    <section
+      id="about"
+      className="scroll-mt-28 relative overflow-hidden py-20 lg:py-32"
+    >
       {/* Decorative glows */}
       <div className="absolute -top-24 -right-24 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
@@ -23,9 +26,51 @@ export function About() {
             <h2 className="text-3xl lg:text-5xl tracking-tight font-bold mb-4">
               {brand.about.headline}
             </h2>
-            <p className="text-lg lg:text-2xl text-muted-foreground mb-6">
+            <p className="text-lg lg:text-2xl text-muted-foreground">
               {brand.about.subheadline}
             </p>
+          </div>
+        </AnimateOnScroll>
+
+        {/* Team photos */}
+        <AnimateOnScroll animation="fade-up">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-4 mb-16">
+            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+              <Image
+                src="/jobs/electrician-commercial-wire-pull.jpg"
+                alt="Electrician pulling commercial wire"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="hidden lg:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+              <Image
+                src="/jobs/fully-stocked-work-van.jpg"
+                alt="Fully stocked electrician work van"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="hidden md:block rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4]">
+              <Image
+                src="/jobs/electrician-on-site.png"
+                alt="Electrician measuring on site"
+                width={400}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="md:col-span-2 rounded-xl overflow-hidden border border-black/[0.06] dark:border-white/10 aspect-[3/4] md:aspect-auto">
+              <Image
+                src="/jobs/service-mast-rooftop-install.png"
+                alt="Electrician installing service mast on rooftop"
+                width={800}
+                height={600}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </AnimateOnScroll>
 
