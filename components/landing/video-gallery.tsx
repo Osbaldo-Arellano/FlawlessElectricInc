@@ -20,7 +20,7 @@ export function VideoGallery() {
               className="group relative overflow-hidden rounded-lg bg-background border border-border/50 hover:border-primary/50 transition-colors cursor-pointer"
               onClick={() => setActiveVideo(item.videoUrl)}
             >
-              <div className="aspect-[3/2] relative bg-black">
+              <div className="aspect-[9/13] relative bg-black">
                 {/* Video thumbnail — first frame via muted autoplay-paused trick */}
                 <video
                   src={item.videoUrl}
@@ -69,7 +69,7 @@ export function VideoGallery() {
               <X className="w-8 h-8" />
               <span className="sr-only">Close video</span>
             </button>
-            <div className="aspect-video">
+            <div className="aspect-[9/13]">
               <video
                 src={activeVideo}
                 controls
