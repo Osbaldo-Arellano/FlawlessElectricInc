@@ -24,42 +24,47 @@ function Pagination({ page, totalPages, goTo }: PaginationProps) {
   if (totalPages <= 1) return null;
 
   return (
-    <div className="flex items-center justify-center gap-3">
-      <button
-        onClick={() => goTo(page - 1)}
-        disabled={page === 0}
-        className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:pointer-events-none transition-colors"
-        aria-label="Previous page"
-      >
-        <ChevronLeft className="w-4 h-4" />
-      </button>
+    <div className="flex flex-col items-center gap-3">
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => goTo(page - 1)}
+          disabled={page === 0}
+          className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:pointer-events-none transition-colors"
+          aria-label="Previous page"
+        >
+          <ChevronLeft className="w-4 h-4" />
+        </button>
 
-      <div className="flex items-center gap-1.5">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={cn(
-              "w-8 h-8 rounded-lg text-sm font-medium transition-all",
-              i === page
-                ? "bg-primary text-primary-foreground"
-                : "hover:bg-muted text-muted-foreground",
-            )}
-            aria-label={`Go to page ${i + 1}`}
-          >
-            {i + 1}
-          </button>
-        ))}
+        <div className="flex items-center gap-1.5">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => goTo(i)}
+              className={cn(
+                "w-8 h-8 rounded-lg text-sm font-medium transition-all",
+                i === page
+                  ? "bg-primary text-primary-foreground"
+                  : "hover:bg-muted text-muted-foreground",
+              )}
+              aria-label={`Go to page ${i + 1}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+
+        <button
+          onClick={() => goTo(page + 1)}
+          disabled={page === totalPages - 1}
+          className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:pointer-events-none transition-colors"
+          aria-label="Next page"
+        >
+          <ChevronRight className="w-4 h-4" />
+        </button>
       </div>
 
-      <button
-        onClick={() => goTo(page + 1)}
-        disabled={page === totalPages - 1}
-        className="p-2 rounded-lg border border-border hover:bg-muted disabled:opacity-30 disabled:pointer-events-none transition-colors"
-        aria-label="Next page"
-      >
-        <ChevronRight className="w-4 h-4" />
-      </button>
+      {/* Faded divider */}
+      <div className="w-48 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     </div>
   );
 }
@@ -94,6 +99,11 @@ export function GallerySwitcher() {
   function goTo(p: number) {
     const nextPage = Math.max(0, Math.min(p, totalPages - 1));
     setPage(nextPage);
+
+    // On mobile, scroll back to the top of the gallery
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      document.getElementById("gallery-pagination")?.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   function openLightboxFromPaged(pagedIdx: number) {
@@ -214,7 +224,7 @@ export function GallerySwitcher() {
             // Wrap photo section with swipe container (mobile only behavior)
             <div ref={swipeRef} className="touch-pan-y">
               {/* Pagination (mobile: top) */}
-              <div className="mb-6 md:hidden">
+              <div id="gallery-pagination" className="mb-6 md:hidden scroll-mt-20">
                 <Pagination page={page} totalPages={totalPages} goTo={goTo} />
               </div>
 
@@ -248,7 +258,7 @@ export function GallerySwitcher() {
                         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
 
                         {/* Magnifying glass */}
-                        <div className="absolute top-3 right-3 rounded-full bg-black/50 p-2 text-white opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+                        <div className="absolute top-3 right-3 rounded-full bg-black/50 p-2 text-white opacity-60 md:opacity-0 group-hover:opacity-100 scale-100 md:scale-75 group-hover:scale-100 transition-all duration-300">
                           <Search className="w-4 h-4" />
                         </div>
                       </div>
@@ -269,8 +279,8 @@ export function GallerySwitcher() {
                 ))}
               </div>
 
-              {/* Pagination (md+: bottom) */}
-              <div className="hidden md:flex items-center justify-center mt-10">
+              {/* Pagination (bottom) */}
+              <div className="flex items-center justify-center mt-10">
                 <Pagination page={page} totalPages={totalPages} goTo={goTo} />
               </div>
 

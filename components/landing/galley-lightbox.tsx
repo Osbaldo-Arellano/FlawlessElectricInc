@@ -210,9 +210,7 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
                   key={`prev-${prevIndex}`}
                   className={cn(
                     "absolute inset-0 transition-all duration-300 ease-out opacity-0",
-                    direction === "right"
-                      ? "-translate-x-4"
-                      : "translate-x-4",
+                    direction === "right" ? "-translate-x-4" : "translate-x-4",
                   )}
                 >
                   <Image
@@ -229,7 +227,7 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
               <div
                 key={`curr-${index}`}
                 className={cn(
-                  "relative w-[min(96vw,1600px)] aspect-[9/13] transition-all duration-300 ease-out",
+                  "relative w-[min(96vw,1600px)] aspect-[9/13] md:aspect-[4/3] xl:aspect-[16/9] transition-all duration-300 ease-out",
                   prevItem ? "animate-in fade-in" : "",
                   prevItem && direction === "right"
                     ? "slide-in-from-right-4"
@@ -268,12 +266,13 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
         {/* Thumbnail strip */}
         {total > 1 && (
           <div
-            className="w-full shrink-0 mt-2"
+            className="shrink-0 mt-2 mx-auto w-full"
+            style={{ maxWidth: "min(96vw, 1600px)" }}
             onClick={(e) => e.stopPropagation()}
           >
             <div
               ref={thumbStripRef}
-              className="flex gap-1.5 overflow-x-auto px-4 py-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
+              className="flex gap-1.5 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
               style={{
                 scrollbarWidth: "thin",
                 msOverflowStyle: "none",
