@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import { ImageIcon, Video, ChevronLeft, ChevronRight } from "lucide-react";
+import { ImageIcon, Video, ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 import { useBrand } from "@/contexts/brand-context";
 import { VideoGallery } from "./video-gallery";
@@ -244,20 +244,25 @@ export function GallerySwitcher() {
                           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                         />
 
-                        {/* Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
 
-                        {/* Content */}
-                        <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                          {item.category ? (
-                            <span className="inline-block px-2 py-1 text-xs font-medium bg-primary text-primary-foreground rounded mb-2">
-                              {item.category}
-                            </span>
-                          ) : null}
-                          <h3 className="text-lg font-semibold text-white">
-                            {item.title}
-                          </h3>
+                        {/* Magnifying glass */}
+                        <div className="absolute top-3 right-3 rounded-full bg-black/50 p-2 text-white opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+                          <Search className="w-4 h-4" />
                         </div>
+                      </div>
+
+                      {/* Info bar */}
+                      <div className="px-3 py-2.5">
+                        <h3 className="text-sm font-medium truncate">
+                          {item.title}
+                        </h3>
+                        {item.category ? (
+                          <span className="text-xs text-muted-foreground">
+                            {item.category}
+                          </span>
+                        ) : null}
                       </div>
                     </button>
                   </AnimateOnScroll>
