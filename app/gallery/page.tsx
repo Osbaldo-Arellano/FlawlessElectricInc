@@ -29,11 +29,13 @@ function GalleryPageInner() {
   );
   const [showGrid, setShowGrid] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const prevIndexRef = useRef(index);
 
-  // Reset loading state when image changes
-  useEffect(() => {
+  // Reset loading state only when index actually changes (not on mount)
+  if (prevIndexRef.current !== index) {
+    prevIndexRef.current = index;
     setImageLoaded(false);
-  }, [index]);
+  }
 
   const total = items.length;
   const item = items[index];
@@ -213,7 +215,7 @@ function GalleryPageInner() {
         </div>
       ) : (
         /* ── Single Image View ── */
-        <div className="max-w-screen-2xl mx-auto">
+        <div className="max-w-screen-2xl mx-auto flex flex-col justify-center" style={{ minHeight: "calc(100dvh - 56px)" }}>
           {/* Main image */}
           <div
             className="relative w-full touch-pan-y"
