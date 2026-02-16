@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, Suspense } from "react";
-import { ArrowLeft, ChevronLeft, ChevronRight, Grid3X3 } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, Grid3X3, Loader2 } from "lucide-react";
 import { useBrand } from "@/contexts/brand-context";
 import { cn } from "@/lib/utils";
 
@@ -28,6 +28,12 @@ function GalleryPageInner() {
     Math.max(0, Math.min(startIndex, items.length - 1)),
   );
   const [showGrid, setShowGrid] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Reset loading state when image changes
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [index]);
 
   const total = items.length;
   const item = items[index];
@@ -234,17 +240,27 @@ function GalleryPageInner() {
               </>
             )}
 
-            {/* The image — natural aspect ratio, max height constrained */}
-            <div className="flex items-center justify-center px-2 sm:px-12 py-4 sm:py-8">
+            {/* The image — fixed-height container so layout doesn't shift */}
+            <div className="relative flex items-center justify-center px-2 sm:px-12 py-4 sm:py-8 min-h-[50vh] sm:min-h-[70vh]">
+              {/* Loading spinner */}
+              {!imageLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <Loader2 className="w-8 h-8 text-white/30 animate-spin" />
+                </div>
+              )}
               <Image
                 key={index}
                 src={item.image}
                 alt={item.title}
                 width={1600}
                 height={1200}
-                className="max-w-full max-h-[70vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded-lg animate-in fade-in duration-300"
+                className={cn(
+                  "max-w-full max-h-[50vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded-lg transition-opacity duration-300",
+                  imageLoaded ? "opacity-100" : "opacity-0",
+                )}
                 sizes="100vw"
                 priority
+                onLoad={() => setImageLoaded(true)}
               />
             </div>
 
