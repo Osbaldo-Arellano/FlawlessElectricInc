@@ -29,6 +29,7 @@ function GalleryPageInner() {
   );
   const [showGrid, setShowGrid] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [zoomed, setZoomed] = useState(false);
   const prevIndexRef = useRef(index);
 
   // Reset loading state only when index actually changes (not on mount)
@@ -81,7 +82,11 @@ function GalleryPageInner() {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
-      if (e.key === "Escape") router.push("/#gallery");
+      if (e.key === "Escape") {
+        if (zoomed) { setZoomed(false); return; }
+        router.push("/#gallery");
+        return;
+      }
       if (e.key === "g") setShowGrid((v) => !v);
     }
     window.addEventListener("keydown", onKeyDown);
@@ -257,12 +262,16 @@ function GalleryPageInner() {
                 width={1600}
                 height={1200}
                 className={cn(
-                  "max-w-full max-h-[50vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded-lg transition-opacity duration-300",
+                  "max-w-full max-h-[50vh] sm:max-h-[75vh] w-auto h-auto object-contain rounded-lg transition-opacity duration-300 cursor-zoom-in",
                   imageLoaded ? "opacity-100" : "opacity-0",
                 )}
                 sizes="100vw"
                 priority
                 onLoad={() => setImageLoaded(true)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setZoomed(true);
+                }}
               />
             </div>
 
@@ -307,6 +316,21 @@ function GalleryPageInner() {
               </div>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Zoom overlay — image contained to fit screen */}
+      {zoomed && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 cursor-zoom-out flex items-center justify-center p-4"
+          onClick={() => setZoomed(false)}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={item.image}
+            alt={item.title}
+            className="max-w-full max-h-full object-contain animate-in fade-in zoom-in-95 duration-200"
+          />
         </div>
       )}
     </div>
