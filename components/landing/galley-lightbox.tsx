@@ -32,12 +32,9 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
       ? items[Math.max(0, Math.min(prevIndex, total - 1))]
       : null;
 
-  // swipe refs (for main image area)
   const swipeStartX = useRef(0);
   const swipeStartY = useRef(0);
   const swiping = useRef(false);
-
-  // thumbnail strip ref for auto-scroll
   const thumbStripRef = useRef<HTMLDivElement>(null);
   const thumbRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -64,14 +61,12 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
     setIndex((i) => (i + 1) % total);
   }, [index, total]);
 
-  // clear prev after crossfade
   useEffect(() => {
     if (prevIndex === null) return;
     const t = setTimeout(() => setPrevIndex(null), 300);
     return () => clearTimeout(t);
   }, [prevIndex]);
 
-  // open animation
   useEffect(() => {
     if (open) {
       setIndex(startIndex);
@@ -87,7 +82,6 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
     }
   }, [open, startIndex]);
 
-  // auto-scroll active thumbnail into view
   useEffect(() => {
     const thumb = thumbRefs.current[index];
     if (!thumb || !thumbStripRef.current) return;
@@ -98,17 +92,15 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
     });
   }, [index]);
 
-  // lock scroll
   useEffect(() => {
     if (!visible) return;
-    const prev = document.body.style.overflow;
+    const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
     };
   }, [visible]);
 
-  // keyboard
   useEffect(() => {
     if (!visible) return;
     function onKeyDown(e: KeyboardEvent) {
@@ -138,145 +130,133 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
     else prev();
   }
 
-  return (
-    <div className="fixed inset-0 z-[60]">
-      {/* Backdrop */}
-      <div
-        className={cn(
-          "absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity duration-300 ease-out",
-          animateIn ? "opacity-100" : "opacity-0",
-        )}
-        onClick={onClose}
-      />
+  // Thumbnail strip height: 48px thumbs + 16px padding = 64px
+  const thumbBarHeight = total > 1 ? 64 : 0;
 
-      {/* Content — full-height flex column */}
+  return (
+    <div
+      className={cn(
+        "fixed inset-0 z-[60] bg-black/95 backdrop-blur-sm transition-opacity duration-300 ease-out touch-none",
+        animateIn ? "opacity-100" : "opacity-0",
+      )}
+      style={{ height: "100dvh" }}
+    >
+      {/*
+        CSS Grid with 2 rows:
+          1fr  = image (fills all available space)
+          auto = thumbnail strip (fixed intrinsic height)
+        This guarantees both are always visible together.
+      */}
       <div
-        className={cn(
-          "absolute inset-0 flex flex-col items-center justify-center p-2 sm:p-3 transition-all duration-300 ease-out",
-          animateIn ? "opacity-100 scale-100" : "opacity-0 scale-95",
-        )}
+        className="grid w-full overflow-hidden"
+        style={{
+          height: "100dvh",
+          gridTemplateRows: total > 1 ? "1fr auto" : "1fr",
+        }}
       >
-        {/* Main image area */}
+        {/* ROW 1: Image + overlaid controls */}
         <div
-          className="relative flex-1 min-h-0 w-full flex items-center justify-center"
-          onClick={(e) => e.stopPropagation()}
+          className="relative min-h-0 min-w-0 overflow-hidden"
           onPointerDown={handlePointerDown}
           onPointerUp={handlePointerUp}
         >
-          <div
-            className="relative"
-            style={{
-              maxWidth: "min(96vw, 1600px)",
-              maxHeight: "calc(94vh - 100px)",
-            }}
+          {/* Close */}
+          <button
+            onClick={onClose}
+            className="absolute top-3 right-3 z-30 rounded-full bg-black/50 hover:bg-black/70 border border-white/10 p-2 text-white transition-colors"
+            aria-label="Close"
+            title="Close (Esc)"
           >
-            {/* Close */}
-            <button
-              onClick={onClose}
-              className="absolute -top-3 -right-3 z-10 rounded-full bg-black/70 border border-white/20 p-2 text-white hover:bg-black/90 transition"
-              aria-label="Close"
-              title="Close (Esc)"
-            >
-              <X className="w-4 h-4" />
-            </button>
+            <X className="w-5 h-5" />
+          </button>
 
-            {/* Prev/Next */}
-            {total > 1 && (
-              <>
-                <button
-                  onClick={prev}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-black/60 border border-white/20 p-3 text-white hover:bg-black/90 transition"
-                  aria-label="Previous"
-                  title="Previous"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                <button
-                  onClick={next}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-black/60 border border-white/20 p-3 text-white hover:bg-black/90 transition"
-                  aria-label="Next"
-                  title="Next"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </>
-            )}
+          {/* Counter */}
+          {total > 1 && (
+            <div className="absolute top-3.5 left-4 z-30 text-xs text-white/50 font-mono">
+              {index + 1} / {total}
+            </div>
+          )}
 
-            {/* Image container with crossfade */}
-            <div className="rounded-xl overflow-hidden border border-white/15 bg-black shadow-2xl relative">
-              {/* Outgoing image */}
-              {prevItem && (
-                <div
-                  key={`prev-${prevIndex}`}
-                  className={cn(
-                    "absolute inset-0 transition-all duration-300 ease-out opacity-0",
-                    direction === "right" ? "-translate-x-4" : "translate-x-4",
-                  )}
-                >
-                  <Image
-                    src={prevItem.image}
-                    alt={prevItem.title}
-                    fill
-                    className="object-contain"
-                    sizes="96vw"
-                  />
-                </div>
-              )}
-
-              {/* Current image */}
-              <div
-                key={`curr-${index}`}
-                className={cn(
-                  "relative w-[min(96vw,1600px)] aspect-[9/13] md:aspect-[4/3] xl:aspect-[16/9] transition-all duration-300 ease-out",
-                  prevItem ? "animate-in fade-in" : "",
-                  prevItem && direction === "right"
-                    ? "slide-in-from-right-4"
-                    : "",
-                  prevItem && direction === "left"
-                    ? "slide-in-from-left-4"
-                    : "",
-                )}
+          {/* Nav arrows */}
+          {total > 1 && (
+            <>
+              <button
+                onClick={prev}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/40 hover:bg-black/70 border border-white/10 p-2 text-white transition-colors"
+                aria-label="Previous"
               >
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-contain"
-                  sizes="96vw"
-                  priority
-                />
-              </div>
-            </div>
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={next}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/40 hover:bg-black/70 border border-white/10 p-2 text-white transition-colors"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </>
+          )}
 
-            {/* Caption */}
+          {/* Outgoing image (crossfade) */}
+          {prevItem && (
             <div
-              key={`caption-${index}`}
-              className="mt-2 text-center text-white/90 animate-in fade-in duration-300"
+              key={`prev-${prevIndex}`}
+              className={cn(
+                "absolute inset-0 transition-all duration-300 ease-out opacity-0",
+                direction === "right" ? "-translate-x-4" : "translate-x-4",
+              )}
             >
-              <div className="text-sm font-medium">{item.title}</div>
-              {item.category ? (
-                <div className="text-xs text-white/60 mt-0.5">
-                  {item.category}
-                </div>
-              ) : null}
+              <Image
+                src={prevItem.image}
+                alt={prevItem.title}
+                fill
+                className="object-contain p-2"
+                sizes="100vw"
+              />
             </div>
+          )}
+
+          {/* Current image */}
+          <div
+            key={`curr-${index}`}
+            className={cn(
+              "absolute inset-0 transition-all duration-300 ease-out",
+              prevItem ? "animate-in fade-in" : "",
+              prevItem && direction === "right" ? "slide-in-from-right-4" : "",
+              prevItem && direction === "left" ? "slide-in-from-left-4" : "",
+            )}
+          >
+            <Image
+              src={item.image}
+              alt={item.title}
+              fill
+              className="object-contain p-2"
+              sizes="100vw"
+              priority
+            />
+          </div>
+
+          {/* Caption overlay */}
+          <div
+            key={`caption-${index}`}
+            className="absolute bottom-0 inset-x-0 z-20 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-12 pb-3 px-4 text-center animate-in fade-in duration-300"
+          >
+            <p className="text-sm font-medium text-white/90 truncate">
+              {item.title}
+            </p>
+            {item.category && (
+              <p className="text-xs text-white/50 mt-0.5">{item.category}</p>
+            )}
           </div>
         </div>
 
-        {/* Thumbnail strip */}
+        {/* ROW 2: Thumbnail strip */}
         {total > 1 && (
-          <div
-            className="shrink-0 mt-2 mx-auto w-full"
-            style={{ maxWidth: "min(96vw, 1600px)" }}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="bg-black/80 border-t border-white/5 px-2 py-2 overflow-hidden">
             <div
               ref={thumbStripRef}
-              className="flex gap-1.5 overflow-x-auto py-2 scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent"
-              style={{
-                scrollbarWidth: "thin",
-                msOverflowStyle: "none",
-              }}
+              className="flex gap-1.5 overflow-x-auto sm:justify-center"
+              style={{ scrollbarWidth: "none" }}
             >
               {items.map((thumbItem, i) => (
                 <button
@@ -286,11 +266,11 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
                   }}
                   onClick={() => goTo(i)}
                   className={cn(
-                    "relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all duration-200",
-                    "border-2 hover:border-white/60",
+                    "relative shrink-0 w-11 h-11 sm:w-12 sm:h-12 rounded overflow-hidden transition-all duration-200",
+                    "ring-2 ring-offset-1 ring-offset-black",
                     i === index
-                      ? "border-white ring-1 ring-white/30 scale-105"
-                      : "border-transparent opacity-50 hover:opacity-80",
+                      ? "ring-white opacity-100"
+                      : "ring-transparent opacity-40 hover:opacity-70",
                   )}
                   aria-label={`View ${thumbItem.title}`}
                 >
@@ -299,7 +279,7 @@ export function GalleryLightbox({ open, items, startIndex, onClose }: Props) {
                     alt={thumbItem.title}
                     fill
                     className="object-cover"
-                    sizes="80px"
+                    sizes="48px"
                   />
                 </button>
               ))}

@@ -2,13 +2,13 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { ImageIcon, Video, ChevronLeft, ChevronRight, Search } from "lucide-react";
 
 import { useBrand } from "@/contexts/brand-context";
 import { VideoGallery } from "./video-gallery";
 import { AnimateOnScroll } from "@/components/animate-on-scroll";
 import { cn } from "@/lib/utils";
-import { GalleryLightbox, type GalleryItem } from "./galley-lightbox";
 
 type GalleryTab = "photos" | "videos";
 
@@ -75,13 +75,9 @@ export function GallerySwitcher() {
   const [activeTab, setActiveTab] = useState<GalleryTab>("photos");
   const [page, setPage] = useState(0);
 
-  // Lightbox state
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
-
   const hasVideos = (brand.gallery.videos?.length ?? 0) > 0;
 
-  const items: GalleryItem[] = useMemo(
+  const items = useMemo(
     () =>
       (brand.gallery.items ?? []).map((it) => ({
         image: it.image,
@@ -106,10 +102,9 @@ export function GallerySwitcher() {
     }
   }
 
-  function openLightboxFromPaged(pagedIdx: number) {
+  function getGalleryHref(pagedIdx: number) {
     const globalIdx = page * PER_PAGE + pagedIdx;
-    setLightboxIndex(globalIdx);
-    setLightboxOpen(true);
+    return `/gallery?photo=${globalIdx}`;
   }
 
   // --- Mobile swipe between pages (whole photo section) ---
@@ -130,7 +125,6 @@ export function GallerySwitcher() {
       // only on mobile + only when photos tab visible + don't swipe if lightbox open
       if (!isMobile()) return;
       if (!(activeTab === "photos" || !hasVideos)) return;
-      if (lightboxOpen) return;
 
       trackingRef.current = true;
       startXRef.current = e.clientX;
@@ -160,7 +154,7 @@ export function GallerySwitcher() {
       el.removeEventListener("pointerdown", onPointerDown);
       el.removeEventListener("pointerup", onPointerUp);
     };
-  }, [activeTab, hasVideos, lightboxOpen, page, totalPages]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [activeTab, hasVideos, page, totalPages]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -233,21 +227,20 @@ export function GallerySwitcher() {
 
               {/* Photo Grid — 6 per page */}
               <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {pagedItems.map((item, index) => (
+                {pagedItems.map((item, idx) => (
                   <AnimateOnScroll
-                    key={`${page}-${index}`}
+                    key={`${page}-${idx}`}
                     animation="fade-up"
-                    delay={index * 75}
+                    delay={idx * 75}
                     triggerOnce={false}
                   >
-                    <button
-                      type="button"
-                      onClick={() => openLightboxFromPaged(index)}
+                    <Link
+                      href={getGalleryHref(idx)}
                       className={cn(
                         "group relative block w-full overflow-hidden rounded-lg bg-background border border-border/50 hover:border-primary/50 transition-colors text-left",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                       )}
-                      aria-label={`Open image: ${item.title}`}
+                      aria-label={`View image: ${item.title}`}
                     >
                       <div className="aspect-[3/2] relative w-full">
                         <Image
@@ -278,7 +271,7 @@ export function GallerySwitcher() {
                           </span>
                         ) : null}
                       </div>
-                    </button>
+                    </Link>
                   </AnimateOnScroll>
                 ))}
               </div>
@@ -288,13 +281,6 @@ export function GallerySwitcher() {
                 <Pagination page={page} totalPages={totalPages} goTo={goTo} />
               </div>
 
-              {/* Lightbox Overlay */}
-              <GalleryLightbox
-                open={lightboxOpen}
-                items={items}
-                startIndex={lightboxIndex}
-                onClose={() => setLightboxOpen(false)}
-              />
             </div>
           ) : (
             <VideoGallery />
