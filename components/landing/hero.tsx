@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import Link from "next/link";
+import { QuoteModal } from "./quote-modal";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -47,6 +48,7 @@ export function Hero() {
 
   const [mounted, setMounted] = useState(false);
   const [textRevealed, setTextRevealed] = useState(false);
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const [headlineHeight, setHeadlineHeight] = useState(0);
 
@@ -376,16 +378,13 @@ export function Hero() {
                     size="lg"
                     variant="secondary"
                     className="group/btn relative overflow-hidden"
-                    asChild
+                    onClick={() => setQuoteModalOpen(true)}
                   >
-                    <Link href={brand.hero.primaryCta.href}>
-                      <span className="relative z-10 flex items-center gap-2">
-                        {brand.hero.primaryCta.label}
-                        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                      </span>
-                      {/* Shine sweep on hover */}
-                      <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 skew-x-12 pointer-events-none" />
-                    </Link>
+                    <span className="relative z-10 flex items-center gap-2">
+                      {brand.hero.primaryCta.label}
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
+                    </span>
+                    <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 skew-x-12 pointer-events-none" />
                   </Button>
                   <Button
                     size="lg"
@@ -480,14 +479,12 @@ export function Hero() {
           <Button
             size="sm"
             className="flex-1 rounded-full text-xs font-medium h-9 group/btn"
-            asChild
+            onClick={() => setQuoteModalOpen(true)}
           >
-            <Link href={brand.hero.primaryCta.href}>
-              <span className="flex items-center justify-center gap-1.5">
-                {brand.hero.primaryCta.label}
-                <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
-              </span>
-            </Link>
+            <span className="flex items-center justify-center gap-1.5">
+              {brand.hero.primaryCta.label}
+              <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
+            </span>
           </Button>
           <Button
             size="sm"
@@ -563,6 +560,8 @@ export function Hero() {
           <ChevronDown className="w-3.5 h-3.5 text-muted-foreground/60" />
         </div>
       </div>
+
+      <QuoteModal open={quoteModalOpen} onOpenChange={setQuoteModalOpen} />
     </section>
   );
 }

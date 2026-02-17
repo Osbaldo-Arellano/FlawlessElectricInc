@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Menu, X, Settings, ArrowRight } from "lucide-react";
+import { Menu, X, Settings } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
@@ -194,22 +194,6 @@ export function Navbar() {
           <LanguageToggle />
           <ThemeToggle />
 
-          {/* CTA with animated glow border */}
-          <div className="relative group/cta">
-            {/* Glow behind button */}
-            <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-primary/40 via-primary/20 to-primary/40 opacity-0 group-hover/cta:opacity-100 blur-md transition-opacity duration-500 pointer-events-none" />
-            <Button className="relative overflow-hidden" asChild>
-              <Link href={brand.navigation.cta.href}>
-                <span className="relative z-10 flex items-center gap-2">
-                  {brand.navigation.cta.label}
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/cta:translate-x-1" />
-                </span>
-                {/* Shine sweep */}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/cta:translate-x-full transition-transform duration-700 skew-x-12 pointer-events-none" />
-              </Link>
-            </Button>
-          </div>
-
           <button
             className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500"
             aria-label="Settings"
@@ -322,21 +306,6 @@ export function Navbar() {
                   : "0ms",
               }}
             >
-              <Button
-                asChild
-                className="flex-1 group/mcta relative overflow-hidden"
-              >
-                <Link
-                  href={brand.navigation.cta.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {brand.navigation.cta.label}
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/mcta:translate-x-1" />
-                  </span>
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/mcta:translate-x-full transition-transform duration-700 skew-x-12 pointer-events-none" />
-                </Link>
-              </Button>
               <button
                 className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500 p-2"
                 aria-label="Settings"
