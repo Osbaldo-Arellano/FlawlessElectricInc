@@ -96,9 +96,20 @@ export function Footer() {
 
         {/* Copyright */}
         <AnimateOnScroll animation="fade">
-          <div className="mt-12 pt-8 border-t border-border">
+          <div className="mt-12 pt-8 border-t border-border space-y-2">
             <p className="text-sm text-muted-foreground text-center">
               {brand.footer.copyright}
+            </p>
+            <p className="text-xs text-muted-foreground/60 text-center">
+              Built by{" "}
+              <a
+                href="https://xicanoweb.carrd.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors underline underline-offset-2"
+              >
+                ConduciveLogic
+              </a>
             </p>
           </div>
         </AnimateOnScroll>
