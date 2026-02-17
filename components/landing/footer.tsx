@@ -30,7 +30,7 @@ export function Footer() {
     : null;
 
   return (
-    <footer id="contact" className="border-t border-border bg-muted/30">
+    <footer className="border-t border-border bg-muted/30">
       <div className="container mx-auto px-4 py-12 lg:py-16">
         <AnimateOnScroll animation="fade-up">
           <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-8">

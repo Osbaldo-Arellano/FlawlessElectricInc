@@ -16,8 +16,8 @@ export const brandConfig = {
   // ============================================
   assets: {
     logo: {
-      light: "/Artboard 6.svg",
-      dark: "/Artboard 6.svg",
+      light: "/logoSmall.svg",
+      dark: "/whiteLogo.svg",
       favicon: "/favicon.ico",
     },
     hero: {
@@ -54,7 +54,7 @@ export const brandConfig = {
   // ============================================
   hero: {
     headline: "Honest Electrical Work for Your Home",
-    subheadline: "Gonzalo Arellano and the Flawless Electric crew deliver safe, code-compliant residential electrical services across the Pacific Northwest. No shortcuts, no surprises — just solid work.",
+    subheadline: "Gonzalo Arellano and the Flawless Electric crew deliver safe, code-compliant residential electrical services across the Pacific Northwest. No shortcuts. No surprises.",
     primaryCta: {
       label: "Get a Free Estimate",
       href: "#contact",
@@ -71,7 +71,7 @@ export const brandConfig = {
     scrollHint: "Scroll down",
     overlayCard: {
       eyebrow: "Our Experience",
-      description: "Gonzalo Arellano and the Flawless Electric crew deliver safe, code-compliant residential electrical services across the Pacific Northwest. No shortcuts, no surprises — just solid work.",
+      description: "Your trusted Portland-area electrical contractor — licensed, insured, and specializing in residential and commercial services. From troubleshooting and panel upgrades to full rewiring, we deliver clean, efficient, honest work. Call for a free estimate.",
       buttons: [
         { label: "More About Us", href: "#about" },
         { label: "Contact Us", href: "#contact" },

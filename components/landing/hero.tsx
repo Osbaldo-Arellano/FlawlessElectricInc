@@ -47,12 +47,25 @@ export function Hero() {
 
   const [mounted, setMounted] = useState(false);
   const [textRevealed, setTextRevealed] = useState(false);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const [headlineHeight, setHeadlineHeight] = useState(0);
 
   // Entrance animation sequence
   useEffect(() => {
     setMounted(true);
     const timer = setTimeout(() => setTextRevealed(true), 300);
     return () => clearTimeout(timer);
+  }, []);
+
+  // Measure headline height for icon sizing
+  useEffect(() => {
+    const el = headlineRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(([entry]) => {
+      setHeadlineHeight(entry.contentRect.height);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
   }, []);
 
   // Mouse-reactive parallax on the hero image (desktop only)
@@ -217,55 +230,66 @@ export function Hero() {
           )}
 
           {/* ── Overlay content ── */}
-          <div className="relative z-10 flex flex-col justify-between h-full p-4 sm:p-6 lg:p-8 container mx-auto">
+          <div className="relative z-10 flex flex-col justify-between h-full p-6 sm:p-8 lg:p-10 container mx-auto gap-8 lg:gap-10">
             {/* Logo + Headline */}
             <div
               ref={mobileLogoRef}
-              className="flex-1 flex flex-col items-start justify-center gap-2 lg:gap-4"
+              className="flex-1 flex flex-col items-start justify-center gap-6 lg:gap-8"
             >
-              {/* Logo entrance */}
-              <div
-                className="transition-all duration-1000 ease-out"
-                style={{
-                  opacity: mounted ? 1 : 0,
-                  transform: mounted
-                    ? "translateY(0) scale(1)"
-                    : "translateY(20px) scale(0.95)",
-                }}
-              >
-                <Image
-                  src="/Artboard 3.svg"
-                  alt={brand.company.name}
-                  width={800}
-                  height={800}
-                  className="w-auto h-32 sm:h-36 lg:h-24 xl:h-32 drop-shadow-lg"
-                  priority
-                />
-              </div>
+              {/* ── Icon + Headline row ── */}
+              <div className="flex items-center gap-4 sm:gap-5 lg:gap-6 max-w-4xl">
+                {/* Icon — sized to match headline */}
+                <div
+                  className="shrink-0 transition-all duration-1000 ease-out"
+                  style={{
+                    opacity: mounted && headlineHeight > 0 ? 1 : 0,
+                    transform: mounted
+                      ? "translateX(0) scale(1)"
+                      : "translateX(-30px) scale(0.95)",
+                    height: headlineHeight > 0 ? headlineHeight : undefined,
+                  }}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/blackIcon.svg"
+                    alt={brand.company.name}
+                    className="h-full w-auto drop-shadow-lg dark:hidden"
+                  />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/whiteIcon.svg"
+                    alt={brand.company.name}
+                    className="h-full w-auto drop-shadow-lg hidden dark:block"
+                  />
+                </div>
 
-              {/* ── Staggered word-by-word headline reveal ── */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-7xl font-bold tracking-tight text-white px-0 max-w-3xl [perspective:600px]">
-                {headlineWords.map((word, i) => (
-                  <span
-                    key={i}
-                    className="inline-block mr-[0.3em] transition-all duration-700 ease-out"
-                    style={{
-                      opacity: textRevealed ? 1 : 0,
-                      transform: textRevealed
-                        ? "translateY(0) rotateX(0)"
-                        : "translateY(40px) rotateX(-20deg)",
-                      transitionDelay: `${i * 120}ms`,
-                      textShadow: "0 2px 30px rgba(0,0,0,0.4)",
-                    }}
-                  >
-                    {word}
-                  </span>
-                ))}
-              </h1>
+                {/* Headline */}
+                <h1
+                  ref={headlineRef}
+                  className="text-xl sm:text-3xl lg:text-4xl xl:text-6xl font-bold tracking-tight leading-tight text-white [perspective:600px]"
+                >
+                  {headlineWords.map((word, i) => (
+                    <span
+                      key={i}
+                      className="inline-block mr-[0.3em] transition-all duration-700 ease-out"
+                      style={{
+                        opacity: textRevealed ? 1 : 0,
+                        transform: textRevealed
+                          ? "translateY(0) rotateX(0)"
+                          : "translateY(40px) rotateX(-20deg)",
+                        transitionDelay: `${i * 120}ms`,
+                        textShadow: "0 2px 30px rgba(0,0,0,0.4)",
+                      }}
+                    >
+                      {word}
+                    </span>
+                  ))}
+                </h1>
+              </div>
 
               {/* ── Subheadline (was in data but never rendered!) ── */}
               <p
-                className="hidden lg:block text-base lg:text-lg text-white/60 max-w-xl leading-relaxed transition-all duration-1000 ease-out"
+                className="text-sm sm:text-base lg:text-lg text-white/60 max-w-xl leading-relaxed transition-all duration-1000 ease-out"
                 style={{
                   opacity: textRevealed ? 1 : 0,
                   transform: textRevealed
@@ -274,17 +298,72 @@ export function Hero() {
                   transitionDelay: `${headlineWords.length * 120 + 200}ms`,
                 }}
               >
-                {brand.hero.subheadline}
+                {brand.hero.subheadline
+                  .split(
+                    /(No shortcuts\.|No surprises\.|Sin atajos\.|Sin sorpresas\.|safe, code-compliant|seguros y conformes al código|Flawless Electric|Gonzalo Arellano|Pacific Northwest|Noroeste del Pacífico)/gi,
+                  )
+                  .map((segment, i) => {
+                    const lower = segment.toLowerCase();
+                    if (
+                      lower === "no shortcuts." ||
+                      lower === "no surprises." ||
+                      lower === "sin atajos." ||
+                      lower === "sin sorpresas."
+                    ) {
+                      return (
+                        <span
+                          key={i}
+                          className="font-bold text-white tracking-wide"
+                        >
+                          {segment}
+                        </span>
+                      );
+                    }
+                    if (
+                      lower === "flawless electric" ||
+                      lower === "gonzalo arellano"
+                    ) {
+                      return (
+                        <span key={i} className="font-semibold text-white/90">
+                          {segment}
+                        </span>
+                      );
+                    }
+                    if (
+                      lower === "safe, code-compliant" ||
+                      lower === "seguros y conformes al código"
+                    ) {
+                      return (
+                        <span
+                          key={i}
+                          className="font-medium text-primary italic"
+                        >
+                          {segment}
+                        </span>
+                      );
+                    }
+                    if (
+                      lower === "pacific northwest" ||
+                      lower === "noroeste del pacífico"
+                    ) {
+                      return (
+                        <span key={i} className="font-medium text-white/80">
+                          {segment}
+                        </span>
+                      );
+                    }
+                    return <span key={i}>{segment}</span>;
+                  })}
               </p>
             </div>
 
             {/* ── Bottom row: CTAs + Stats | Overlay Card ── */}
-            <div className="flex flex-col lg:flex-row 2xl:flex-col lg:items-end 2xl:items-start lg:justify-between gap-6">
+            <div className="flex flex-col lg:flex-row 2xl:flex-col lg:items-end 2xl:items-start lg:justify-between gap-8">
               {/* Desktop CTAs + Stats */}
-              <div className="hidden lg:flex flex-col gap-6">
+              <div className="hidden lg:flex flex-col gap-8">
                 {/* CTA Buttons */}
                 <div
-                  className="flex gap-3 transition-all duration-700 ease-out"
+                  className="flex gap-4 transition-all duration-700 ease-out"
                   style={{
                     opacity: textRevealed ? 1 : 0,
                     transform: textRevealed
@@ -376,7 +455,7 @@ export function Hero() {
                   </p>
 
                   {/* Buttons */}
-                  <div className="flex flex-wrap gap-2 relative">
+                  <div className="flex gap-2 relative">
                     {brand.hero.overlayCard.buttons.map((btn) => (
                       <Link
                         key={btn.href}
@@ -396,8 +475,8 @@ export function Hero() {
       </div>
 
       {/* ─── Mobile CTAs & Stats (below image) ─── */}
-      <div ref={ctaRef} className="mt-5 space-y-5 lg:hidden relative px-1">
-        <div className="flex flex-row gap-2.5">
+      <div ref={ctaRef} className="mt-6 space-y-6 lg:hidden relative px-4">
+        <div className="flex flex-row gap-3">
           <Button
             size="sm"
             className="flex-1 rounded-full text-xs font-medium h-9 group/btn"
@@ -422,7 +501,7 @@ export function Hero() {
           </Button>
         </div>
 
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-3">
           {/* Stats — stacked as 3 rows */}
           <div className="flex flex-col gap-3 shrink-0">
             {brand.hero.stats.map((stat) => (

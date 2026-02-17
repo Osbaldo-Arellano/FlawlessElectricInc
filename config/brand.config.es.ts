@@ -16,8 +16,8 @@ export const brandConfig = {
   // ============================================
   assets: {
     logo: {
-      light: "/Artboard 6.svg",
-      dark: "/Artboard 6.svg",
+      light: "/logoSmall.svg",
+      dark: "/whiteLogo.svg",
       favicon: "/favicon.ico",
     },
     hero: {
@@ -54,7 +54,7 @@ export const brandConfig = {
   // ============================================
   hero: {
     headline: "Trabajo El\u00e9ctrico Honesto para Tu Hogar",
-    subheadline: "Gonzalo Arellano y el equipo de Flawless Electric ofrecen servicios el\u00e9ctricos residenciales seguros y conformes al c\u00f3digo en todo el noroeste del Pac\u00edfico. Sin atajos, sin sorpresas \u2014 solo trabajo s\u00f3lido.",
+    subheadline: "Gonzalo Arellano y el equipo de Flawless Electric ofrecen servicios el\u00e9ctricos residenciales seguros y conformes al c\u00f3digo en todo el Noroeste del Pac\u00edfico. Sin atajos. Sin sorpresas.",
     primaryCta: {
       label: "Cotizaci\u00f3n Gratis",
       href: "#contact",
@@ -71,7 +71,7 @@ export const brandConfig = {
     scrollHint: "Desliza hacia abajo para más",
     overlayCard: {
       eyebrow: "Nuestra Experiencia",
-      description: "Gonzalo Arellano y el equipo de Flawless Electric ofrecen servicios el\u00e9ctricos residenciales seguros y conformes al c\u00f3digo en todo el noroeste del Pac\u00edfico. Sin atajos, sin sorpresas \u2014 solo trabajo s\u00f3lido.",
+      description: "Su contratista el\u00e9ctrico de confianza en el \u00e1rea de Portland \u2014 con licencia, asegurado y especializado en servicios residenciales y comerciales. Desde diagn\u00f3sticos y mejoras de paneles hasta recableado completo, ofrecemos trabajo limpio, eficiente y honesto.",
       buttons: [
         { label: "M\u00e1s Sobre Nosotros", href: "#about" },
         { label: "Cont\u00e1ctanos", href: "#contact" },

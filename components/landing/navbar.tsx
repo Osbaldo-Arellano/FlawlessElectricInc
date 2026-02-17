@@ -106,7 +106,7 @@ export function Navbar() {
         {/* ── Logo ── */}
         <Link
           href="/"
-          className="z-10 group/logo hidden lg:block"
+          className="z-10 group/logo"
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? "translateX(0)" : "translateX(-20px)",
@@ -120,7 +120,7 @@ export function Navbar() {
                 alt={brand.company.name}
                 width={200}
                 height={112}
-                className="h-25 lg:h-80 w-auto object-contain m-0 p-0 transition-all duration-500 group-hover/logo:scale-105"
+                className="h-10 lg:h-10 w-auto object-contain m-0 p-0 transition-all duration-500 group-hover/logo:scale-105"
               />
               {/* Logo glow on hover */}
               <div className="absolute inset-0 bg-primary/0 group-hover/logo:bg-primary/10 rounded-full blur-2xl transition-all duration-500 pointer-events-none" />

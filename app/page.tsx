@@ -9,10 +9,12 @@ import {
   Footer,
 } from "@/components/landing";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { HashScrollFix } from "@/components/hash-scroll-fix";
 
 export default function Home() {
   return (
     <>
+      <HashScrollFix />
       <Navbar />
       <main>
         <Hero />

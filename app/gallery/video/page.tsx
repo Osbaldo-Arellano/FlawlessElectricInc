@@ -129,7 +129,7 @@ function VideoPageInner() {
           )}
 
           {/* Video container */}
-          <div className="relative flex items-center justify-center px-2 sm:px-12 py-4 sm:py-8 min-h-[50vh] sm:min-h-[70vh]">
+          <div className="relative flex items-center justify-center px-2 sm:px-6 py-4 sm:py-6 min-h-[60vh] sm:min-h-[75vh]">
             {!videoLoaded && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <Loader2 className="w-8 h-8 text-white/30 animate-spin" />
@@ -142,7 +142,7 @@ function VideoPageInner() {
               autoPlay
               playsInline
               className={cn(
-                "max-w-full max-h-[50vh] sm:max-h-[75vh] w-auto h-auto rounded-lg transition-opacity duration-300",
+                "w-full max-h-[65vh] sm:max-h-[80vh] rounded-lg transition-opacity duration-300",
                 videoLoaded ? "opacity-100" : "opacity-0",
               )}
               onLoadedData={() => setVideoLoaded(true)}
