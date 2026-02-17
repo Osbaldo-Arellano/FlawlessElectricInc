@@ -217,13 +217,42 @@ export const brandConfig = {
   },
 
   // ============================================
+  // ANNOUNCEMENT BAR
+  // ============================================
+  announcementBar: {
+    cta: "Cotización Gratis AQUÍ",
+  },
+
+  // ============================================
+  // QUOTE MODAL
+  // ============================================
+  quoteModal: {
+    title: "Solicitar Cotización Gratis",
+    subtitle: "Cuéntanos sobre tu proyecto y te responderemos en 24 horas.",
+    firstNameLabel: "Nombre",
+    lastNameLabel: "Apellido",
+    emailLabel: "Correo Electrónico",
+    phoneLabel: "Teléfono (Opcional)",
+    servicesLabel: "Servicios Necesarios",
+    servicesPlaceholder: "Seleccionar servicios...",
+    messageLabel: "Mensaje",
+    messagePlaceholder: "Cuéntanos sobre tu proyecto...",
+    submitLabel: "Solicitar Cotización",
+    submittingLabel: "Enviando...",
+    successTitle: "¡Solicitud de Cotización Enviada!",
+    successMessage: "Te responderemos en 24 horas.",
+    sendAnother: "Enviar Otra Solicitud",
+  },
+
+  // ============================================
   // CTA SECTION
   // ============================================
   cta: {
-    headline: "\u00bfNecesitas Trabajo El\u00e9ctrico Bien Hecho?",
+    headline: "¿Necesitas Trabajo Eléctrico Bien Hecho?",
     subheadline: "Obtén una cotización gratis de una empresa eléctrica de veterano con entrenamiento sindical. Servimos a hogares en todo el noroeste del Pacífico.",
+    servicesLabel: "Servicios Necesarios",
     primaryCta: {
-      label: "Solicitar Cotizaci\u00f3n Gratis",
+      label: "Solicitar Cotización Gratis",
       href: "#contact",
     },
     secondaryCta: {

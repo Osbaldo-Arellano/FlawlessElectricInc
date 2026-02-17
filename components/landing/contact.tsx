@@ -14,6 +14,15 @@ export function Contact() {
   const { brand } = useBrand();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  const toggleService = (title: string) => {
+    setSelectedServices((prev) =>
+      prev.includes(title)
+        ? prev.filter((s) => s !== title)
+        : [...prev, title]
+    );
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -114,7 +123,7 @@ export function Contact() {
                   <Button
                     variant="outline"
                     className="mt-6"
-                    onClick={() => setSubmitted(false)}
+                    onClick={() => { setSubmitted(false); setSelectedServices([]); }}
                   >
                     Send Another Message
                   </Button>
@@ -165,6 +174,26 @@ export function Contact() {
                       placeholder="+1 (555) 123-4567"
                       className="bg-muted/40 dark:bg-background border-border focus:bg-background dark:focus:bg-background"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label className="font-medium">{brand.cta.servicesLabel}</Label>
+                    <div className="grid sm:grid-cols-2 gap-2">
+                      {brand.services.items.map((service) => (
+                        <label
+                          key={service.title}
+                          className="flex items-center gap-2 p-2 rounded-md border border-border hover:bg-muted/40 cursor-pointer transition-colors text-sm"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedServices.includes(service.title)}
+                            onChange={() => toggleService(service.title)}
+                            className="rounded border-border text-primary focus:ring-primary"
+                          />
+                          <span>{service.title}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-2">

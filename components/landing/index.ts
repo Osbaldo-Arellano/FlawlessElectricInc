@@ -1,3 +1,4 @@
+export { AnnouncementBar } from "./announcement-bar";
 export { Navbar } from "./navbar";
 export { Hero } from "./hero";
 export { TrustBar } from "./trust-bar";

@@ -217,11 +217,40 @@ export const brandConfig = {
   },
 
   // ============================================
+  // ANNOUNCEMENT BAR
+  // ============================================
+  announcementBar: {
+    cta: "Free Quote HERE",
+  },
+
+  // ============================================
+  // QUOTE MODAL
+  // ============================================
+  quoteModal: {
+    title: "Request a Free Quote",
+    subtitle: "Tell us about your project and we'll get back to you within 24 hours.",
+    firstNameLabel: "First Name",
+    lastNameLabel: "Last Name",
+    emailLabel: "Email",
+    phoneLabel: "Phone (Optional)",
+    servicesLabel: "Services Needed",
+    servicesPlaceholder: "Select services...",
+    messageLabel: "Message",
+    messagePlaceholder: "Tell us about your project...",
+    submitLabel: "Request Quote",
+    submittingLabel: "Sending...",
+    successTitle: "Quote Request Sent!",
+    successMessage: "We'll get back to you within 24 hours.",
+    sendAnother: "Send Another Request",
+  },
+
+  // ============================================
   // CTA SECTION
   // ============================================
   cta: {
     headline: "Need Electrical Work Done Right?",
     subheadline: "Get a free estimate from a veteran-owned, union-trained electrical company. We serve homeowners across the Pacific Northwest.",
+    servicesLabel: "Services Needed",
     primaryCta: {
       label: "Request a Free Estimate",
       href: "#contact",

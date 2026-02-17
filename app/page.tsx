@@ -1,4 +1,5 @@
 import {
+  AnnouncementBar,
   Navbar,
   Hero,
   TrustBar,
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <HashScrollFix />
+      <AnnouncementBar />
       <Navbar />
       <main>
         <Hero />

@@ -77,9 +77,30 @@ export interface BrandState {
     items: Array<{ image: string; title: string; category: string }>;
     videos: Array<{ videoUrl: string; title: string; category: string }>;
   };
+  announcementBar: {
+    cta: string;
+  };
+  quoteModal: {
+    title: string;
+    subtitle: string;
+    firstNameLabel: string;
+    lastNameLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    servicesLabel: string;
+    servicesPlaceholder: string;
+    messageLabel: string;
+    messagePlaceholder: string;
+    submitLabel: string;
+    submittingLabel: string;
+    successTitle: string;
+    successMessage: string;
+    sendAnother: string;
+  };
   cta: {
     headline: string;
     subheadline: string;
+    servicesLabel: string;
     primaryCta: { label: string; href: string };
     secondaryCta: { label: string; href: string };
   };
@@ -137,6 +158,8 @@ function getInitialState(lang: Language): BrandState {
     about: JSON.parse(JSON.stringify(config.about)),
     services: JSON.parse(JSON.stringify(config.services)),
     gallery: JSON.parse(JSON.stringify(config.gallery)),
+    announcementBar: { ...config.announcementBar },
+    quoteModal: { ...config.quoteModal },
     cta: JSON.parse(JSON.stringify(config.cta)),
     footer: JSON.parse(JSON.stringify(config.footer)),
 };
