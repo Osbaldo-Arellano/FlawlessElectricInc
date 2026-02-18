@@ -194,12 +194,15 @@ export function Navbar() {
           <LanguageToggle />
           <ThemeToggle />
 
-          <button
+          <Link
+            href="https://flawless-electric-inc-print-portal.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500"
             aria-label="Settings"
           >
             <Settings className="w-4 h-4" />
-          </button>
+          </Link>
         </div>
 
         {/* ── Mobile Actions + Hamburger ── */}
@@ -306,12 +309,15 @@ export function Navbar() {
                   : "0ms",
               }}
             >
-              <button
+              <Link
+                href="https://flawless-electric-inc-print-portal.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500 p-2"
                 aria-label="Settings"
               >
                 <Settings className="w-5 h-5" />
-              </button>
+              </Link>
             </div>
           </div>
         </div>
