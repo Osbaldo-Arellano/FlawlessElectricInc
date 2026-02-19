@@ -29,11 +29,30 @@ export function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission - replace with actual API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const form = e.currentTarget;
+    const data = new FormData(form);
 
-    setIsSubmitting(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          services: selectedServices,
+          message: data.get("message"),
+          source: "contact",
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Contact form error:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

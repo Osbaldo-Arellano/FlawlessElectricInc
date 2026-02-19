@@ -38,9 +38,31 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    setSubmitted(true);
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          email: data.get("email"),
+          phone: data.get("phone"),
+          services: selectedServices,
+          message: data.get("message"),
+          source: "quote",
+        }),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Quote modal error:", err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
