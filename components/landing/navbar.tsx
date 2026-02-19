@@ -102,11 +102,11 @@ export function Navbar() {
         />
       </div>
 
-      <nav className="container mx-auto flex h-24 items-center justify-between px-4 relative z-10">
+      <nav className="container mx-auto flex h-24 items-center px-4 relative z-10">
         {/* ── Logo ── */}
         <Link
           href="/"
-          className="z-10 group/logo"
+          className="z-10 group/logo shrink-0"
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? "translateX(0)" : "translateX(-20px)",
@@ -132,12 +132,10 @@ export function Navbar() {
 
         {/* ── Desktop Navigation — Frosted pill container ── */}
         <div
-          className="hidden lg:flex items-center absolute left-1/2 -translate-x-1/2"
+          className="hidden lg:flex flex-1 items-center justify-center"
           style={{
             opacity: mounted ? 1 : 0,
-            transform: mounted
-              ? "translateY(0) translateX(-50%)"
-              : "translateY(-16px) translateX(-50%)",
+            transform: mounted ? "translateY(0)" : "translateY(-16px)",
             transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1) 200ms",
           }}
         >
@@ -184,7 +182,7 @@ export function Navbar() {
 
         {/* ── Desktop Actions ── */}
         <div
-          className="hidden lg:flex items-center gap-3 z-10 ml-auto"
+          className="hidden lg:flex items-center gap-3 z-10 shrink-0"
           style={{
             opacity: mounted ? 1 : 0,
             transform: mounted ? "translateX(0)" : "translateX(20px)",

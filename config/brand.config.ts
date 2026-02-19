@@ -251,6 +251,8 @@ export const brandConfig = {
     headline: "Need Electrical Work Done Right?",
     subheadline: "Get a free estimate from a veteran-owned, union-trained electrical company. We serve homeowners across the Pacific Northwest.",
     servicesLabel: "Services Needed",
+    getInTouchTitle: "Get in Touch",
+    getInTouchDescription: "Have a question or want to work together? Fill out the form and we\u2019ll get back to you as soon as possible.",
     primaryCta: {
       label: "Request a Free Estimate",
       href: "#contact",

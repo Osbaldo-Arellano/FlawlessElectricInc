@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, useRef, startTransition, ReactNode, useCallback } from "react";
 import { brandConfig as configEN } from "@/config/brand.config";
 import { brandConfig as configES } from "@/config/brand.config.es";
+import { supabase, formatAddress, formatPhone, type BrandRow, type BrandPhotoRow } from "@/lib/supabase";
 
 // Available languages
 export type Language = "en" | "es";
@@ -101,6 +102,8 @@ export interface BrandState {
     headline: string;
     subheadline: string;
     servicesLabel: string;
+    getInTouchTitle: string;
+    getInTouchDescription: string;
     primaryCta: { label: string; href: string };
     secondaryCta: { label: string; href: string };
   };
@@ -223,6 +226,134 @@ export function BrandProvider({ children }: { children: ReactNode }) {
       setIsHydrated(true);
     });
   }, []);
+
+  // Fetch brand data from Supabase and merge over the static config defaults.
+  // Priority: uploaded logo (localStorage) > Supabase DB > static config
+  useEffect(() => {
+    if (!isHydrated) return;
+
+    const userId = process.env.NEXT_PUBLIC_BRAND_USER_ID;
+    if (!userId) return;
+
+    async function fetchFromSupabase() {
+      const [{ data: dbBrand }, { data: dbPhotos }] = await Promise.all([
+        supabase
+          .from("brands")
+          .select("*")
+          .eq("user_id", userId)
+          .single<BrandRow>(),
+        supabase
+          .from("brand_photos")
+          .select("*")
+          .eq("user_id", userId)
+          .order("sort_order")
+          .returns<BrandPhotoRow[]>(),
+      ]);
+
+      if (!dbBrand && !dbPhotos) return;
+
+      setBrand((prev) => {
+        const next = { ...prev };
+
+        if (dbBrand) {
+          // Company info
+          next.company = {
+            ...prev.company,
+            ...(dbBrand.name && { name: dbBrand.name }),
+            ...(dbBrand.tagline && { tagline: dbBrand.tagline }),
+            ...(dbBrand.email && { email: dbBrand.email }),
+            ...(dbBrand.phone && { phone: dbBrand.phone }),
+            ...(dbBrand.address &&
+              Object.keys(dbBrand.address).length > 0 && {
+                address: formatAddress(dbBrand.address),
+              }),
+          };
+
+          // About Us — only override in English; Spanish keeps its own translated config text
+          if (dbBrand.about_us && language === "en") {
+            next.about = { ...prev.about, description: dbBrand.about_us };
+          }
+
+          // Logo variants — fall back to logo_url for primary/light
+          const variants = dbBrand.logo_variants ?? {};
+          const primaryUrl = variants.primary ?? variants.light ?? dbBrand.logo_url;
+          next.assets = {
+            ...prev.assets,
+            logo: {
+              ...prev.assets.logo,
+              ...(primaryUrl && { light: primaryUrl }),
+              ...(variants.dark && { dark: variants.dark }),
+              ...(variants.favicon && { favicon: variants.favicon }),
+            },
+          };
+
+          // Footer: social links + description + copyright + contact column
+          {
+            const footerUpdate = { ...prev.footer };
+
+            if (dbBrand.social_links && dbBrand.social_links.length > 0) {
+              footerUpdate.social = dbBrand.social_links.map(({ platform, url }) => ({
+                platform,
+                url,
+              }));
+            }
+
+            if (dbBrand.tagline) {
+              footerUpdate.description = dbBrand.tagline;
+            }
+
+            if (dbBrand.name) {
+              footerUpdate.copyright = `\u00a9 ${new Date().getFullYear()} ${dbBrand.name}. All rights reserved.`;
+            }
+
+            // Rebuild the contact column with live DB values.
+            // We detect the contact column by the presence of mailto:/tel: links
+            // so this works regardless of the active language.
+            const contactLinks: Array<{ label: string; href: string }> = [];
+            if (dbBrand.email) {
+              contactLinks.push({ label: dbBrand.email, href: `mailto:${dbBrand.email}` });
+            }
+            if (dbBrand.phone) {
+              contactLinks.push({
+                label: formatPhone(dbBrand.phone),
+                href: `tel:${dbBrand.phone.replace(/\D/g, "")}`,
+              });
+            }
+            if (dbBrand.address && Object.keys(dbBrand.address).length > 0) {
+              const addrStr = formatAddress(dbBrand.address);
+              if (addrStr) contactLinks.push({ label: addrStr, href: "#contact" });
+            }
+            if (contactLinks.length > 0) {
+              footerUpdate.columns = prev.footer.columns.map((col) => {
+                const isContactCol = col.links.some(
+                  (l) => l.href.startsWith("mailto:") || l.href.startsWith("tel:")
+                );
+                return isContactCol ? { ...col, links: contactLinks } : col;
+              });
+            }
+
+            next.footer = footerUpdate;
+          }
+        }
+
+        // Photo gallery
+        if (dbPhotos && dbPhotos.length > 0) {
+          next.gallery = {
+            ...prev.gallery,
+            items: dbPhotos.map((p) => ({
+              image: p.url,
+              title: p.caption ?? p.alt_text ?? "",
+              category: "",
+            })),
+          };
+        }
+
+        return next;
+      });
+    }
+
+    fetchFromSupabase();
+  }, [isHydrated, language]);
 
   // Save to localStorage on change (after hydration)
   useEffect(() => {

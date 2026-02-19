@@ -251,6 +251,8 @@ export const brandConfig = {
     headline: "¿Necesitas Trabajo Eléctrico Bien Hecho?",
     subheadline: "Obtén una cotización gratis de una empresa eléctrica de veterano con entrenamiento sindical. Servimos a hogares en todo el noroeste del Pacífico.",
     servicesLabel: "Servicios Necesarios",
+    getInTouchTitle: "Ponte en Contacto",
+    getInTouchDescription: "\u00bfTienes alguna pregunta o quieres trabajar juntos? Llena el formulario y te responderemos lo antes posible.",
     primaryCta: {
       label: "Solicitar Cotización Gratis",
       href: "#contact",

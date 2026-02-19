@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
+import { formatPhone } from "@/lib/supabase";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -55,9 +56,9 @@ export function Contact() {
           <AnimateOnScroll animation="slide-left">
             <div className="space-y-8">
               <div>
-                <h3 className="text-xl font-semibold mb-6">Get in Touch</h3>
+                <h3 className="text-xl font-semibold mb-6">{brand.cta.getInTouchTitle}</h3>
                 <p className="text-muted-foreground mb-8">
-                  Have a question or want to work together? Fill out the form and we&apos;ll get back to you as soon as possible.
+                  {brand.cta.getInTouchDescription}
                 </p>
               </div>
 
@@ -87,7 +88,7 @@ export function Contact() {
                       href={`tel:${brand.company.phone.replace(/\D/g, "")}`}
                       className="text-muted-foreground hover:text-primary transition-colors"
                     >
-                      {brand.company.phone}
+                      {formatPhone(brand.company.phone)}
                     </a>
                   </div>
                 </div>
