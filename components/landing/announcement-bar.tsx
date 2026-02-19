@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Phone } from "lucide-react";
 
 import { useBrand } from "@/contexts/brand-context";
+import { formatPhone } from "@/lib/supabase";
 import { QuoteModal } from "./quote-modal";
 
 export function AnnouncementBar() {
@@ -25,7 +26,7 @@ export function AnnouncementBar() {
             className="flex items-center gap-1.5 hover:underline underline-offset-2 transition-colors"
           >
             <Phone className="w-3.5 h-3.5" />
-            <span>{brand.company.phone}</span>
+            <span>{formatPhone(brand.company.phone)}</span>
           </a>
         </div>
       </div>
