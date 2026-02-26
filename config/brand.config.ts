@@ -6,7 +6,7 @@ export const brandConfig = {
     name: "Flawless Electric Inc",
     tagline: "Veteran-owned. Union-trained. Built to last.",
     description: "Residential electrical services you can trust. Veteran-owned, union-trained craftsmanship serving the Pacific Northwest with honest, reliable work.",
-    email: "info@flawlesselectric.com",
+    email: "info@flawlesselectricinc.com",
     phone: "+1 (503) 555-0172",
     address: "Oregon Licensed",
   },
@@ -290,7 +290,7 @@ export const brandConfig = {
       {
         title: "Contact",
         links: [
-          { label: "info@flawlesselectric.com", href: "mailto:info@flawlesselectric.com" },
+          { label: "info@flawlesselectricinc.com", href: "mailto:info@flawlesselectricinc.com" },
           { label: "+1 (503) 555-0172", href: "tel:+15035550172" },
           { label: "Portland, OR", href: "#contact" },
         ],

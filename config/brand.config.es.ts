@@ -6,7 +6,7 @@ export const brandConfig = {
     name: "Flawless Electric Inc",
     tagline: "Propiedad de veterano. Entrenamiento sindical. Hecho para durar.",
     description: "Servicios eléctricos residenciales de confianza. Propiedad de veterano, trabajo sindical profesional al servicio del noroeste del Pacífico, con honestidad y calidad.",
-    email: "info@flawlesselectric.com",
+    email: "info@flawlesselectricinc.com",
     phone: "+1 (503) 555-0172",
     address: "Portland, OR \u2014 Sirviendo al Noroeste del Pac\u00edfico",
   },
@@ -290,7 +290,7 @@ export const brandConfig = {
       {
         title: "Contacto",
         links: [
-          { label: "info@flawlesselectric.com", href: "mailto:info@flawlesselectric.com" },
+          { label: "info@flawlesselectricinc.com", href: "mailto:info@flawlesselectricinc.com" },
           { label: "+1 (503) 555-0172", href: "tel:+15035550172" },
           { label: "Portland, OR", href: "#contact" },
         ],
