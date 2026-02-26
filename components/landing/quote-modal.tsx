@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 
 import {
@@ -26,6 +26,11 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  // Spam protection: reset timestamp each time the dialog opens
+  const [loadedAt, setLoadedAt] = useState(0);
+  useEffect(() => {
+    if (open) setLoadedAt(Date.now());
+  }, [open]);
 
   const toggleService = (title: string) => {
     setSelectedServices((prev) =>
@@ -54,6 +59,8 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
           services: selectedServices,
           message: data.get("message"),
           source: "quote",
+          _hp: data.get("website"),
+          loadedAt,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -116,6 +123,29 @@ export function QuoteModal({ open, onOpenChange }: QuoteModalProps) {
             </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4 mt-2">
+              {/* Honeypot — visually hidden, humans never see or fill it */}
+              <div
+                aria-hidden="true"
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  overflow: "hidden",
+                  opacity: 0,
+                  pointerEvents: "none",
+                }}
+              >
+                <label htmlFor="quoteWebsite">Website</label>
+                <input
+                  type="text"
+                  id="quoteWebsite"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="grid sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="quoteFirstName" className="font-medium">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Send, Mail, Phone, MapPin } from "lucide-react";
 import { formatPhone } from "@/lib/supabase";
 
@@ -16,6 +16,8 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
+  // Spam protection: record when the form was rendered
+  const loadedAt = useRef(Date.now());
 
   const toggleService = (title: string) => {
     setSelectedServices((prev) =>
@@ -44,6 +46,8 @@ export function Contact() {
           services: selectedServices,
           message: data.get("message"),
           source: "contact",
+          _hp: data.get("website"),
+          loadedAt: loadedAt.current,
         }),
       });
       if (!res.ok) throw new Error(await res.text());
@@ -150,6 +154,29 @@ export function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Honeypot — visually hidden, humans never see or fill it */}
+                  <div
+                    aria-hidden="true"
+                    style={{
+                      position: "absolute",
+                      left: "-9999px",
+                      width: "1px",
+                      height: "1px",
+                      overflow: "hidden",
+                      opacity: 0,
+                      pointerEvents: "none",
+                    }}
+                  >
+                    <label htmlFor="website">Website</label>
+                    <input
+                      type="text"
+                      id="website"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName" className="font-medium">First Name</Label>
