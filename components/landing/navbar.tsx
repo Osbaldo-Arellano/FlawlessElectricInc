@@ -193,7 +193,7 @@ export function Navbar() {
           <ThemeToggle />
 
           <Link
-            href="https://flawless-electric-inc-print-portal.vercel.app/"
+            href="https://conducivelogic.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500"
@@ -308,7 +308,7 @@ export function Navbar() {
               }}
             >
               <Link
-                href="https://flawless-electric-inc-print-portal.vercel.app/"
+                href="https://conducivelogic.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground/30 hover:text-muted-foreground hover:rotate-90 transition-all duration-500 p-2"
