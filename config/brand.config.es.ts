@@ -295,13 +295,6 @@ export const brandConfig = {
           { label: "Portland, OR", href: "#contact" },
         ],
       },
-      {
-        title: "Legal",
-        links: [
-          { label: "Pol\u00edtica de Privacidad", href: "/privacy" },
-          { label: "T\u00e9rminos de Servicio", href: "/terms" },
-        ],
-      },
     ],
     social: [
       { platform: "facebook", url: "https://facebook.com" },
