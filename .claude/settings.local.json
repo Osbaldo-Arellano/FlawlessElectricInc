@@ -8,7 +8,9 @@
       "Bash(ls:*)",
       "Bash(dir:*)",
       "Bash(powershell -Command:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)"
     ]
   }
 }
