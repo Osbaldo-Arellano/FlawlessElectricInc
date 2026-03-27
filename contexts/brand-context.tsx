@@ -306,7 +306,7 @@ export function BrandProvider({ children }: { children: ReactNode }) {
             }
 
             if (dbBrand.name) {
-              footerUpdate.copyright = `\u00a9 ${new Date().getFullYear()} ${dbBrand.name}. All rights reserved.`;
+              footerUpdate.copyright = `\u00a9 ${new Date().getFullYear()} ${dbBrand.name}. All rights reserved. | Oregon CCB #260637`;
             }
 
             // Rebuild the contact column with live DB values.

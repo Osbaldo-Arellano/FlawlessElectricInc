@@ -65,7 +65,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "panel upgrade Portland OR",
       "whole home rewiring Oregon",
       "residential electrician Pacific Northwest",
-      "licensed electrician Oregon CCB",
+      "licensed electrician Oregon CCB 260637",
       "EV charger installation Portland",
       "electrical contractor Oregon",
       "PNW electrician",
@@ -156,7 +156,7 @@ const jsonLd = {
     },
   ],
   hasCredential: [
-    "Oregon CCB Licensed",
+    "Oregon CCB #260637",
     "IBEW Union Member",
     "NECA Member",
     "Veteran Owned Business",

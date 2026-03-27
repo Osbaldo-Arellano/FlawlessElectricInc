@@ -84,7 +84,7 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "Trusted by homeowners across the PNW",
-    credentials: ["Veteran Owned", "IBEW", "NECA", "Oregon CCB", "BBB Accredited", "Energy Trust of Oregon"],
+    credentials: ["Oregon CCB #260637", "Veteran Owned", "IBEW", "NECA", "BBB Accredited", "Energy Trust of Oregon"],
   },
 
   // ============================================
@@ -302,7 +302,7 @@ export const brandConfig = {
       { platform: "youtube", url: "https://youtube.com" },
       { platform: "linkedin", url: "https://linkedin.com" },
     ],
-    copyright: "\u00a9 2024 Flawless Electric Inc. All rights reserved.",
+    copyright: "\u00a9 2024 Flawless Electric Inc. All rights reserved. | Oregon CCB #260637",
   },
 } as const;
 
