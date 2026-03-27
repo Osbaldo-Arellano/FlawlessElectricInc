@@ -37,6 +37,7 @@ export interface BrandRow {
     light?: string;
     favicon?: string;
   } | null;
+  icon_url: string | null;
   updated_at: string;
 }
 

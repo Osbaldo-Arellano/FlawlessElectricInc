@@ -253,7 +253,7 @@ export function Hero() {
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/blackIcon.svg"
+                    src={brand.assets.logo.icon ?? "/blackIcon.svg"}
                     alt={brand.company.name}
                     className="h-full w-auto drop-shadow-lg dark:hidden"
                   />

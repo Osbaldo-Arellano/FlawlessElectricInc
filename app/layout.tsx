@@ -36,13 +36,13 @@ export async function generateMetadata(): Promise<Metadata> {
       const client = createClient(supabaseUrl, supabaseKey);
       const { data } = await client
         .from("brands")
-        .select("logo_variants")
+        .select("logo_variants, icon_url")
         .eq("user_id", userId)
         .single();
 
       const variants = data?.logo_variants ?? {};
       const remote =
-        variants.favicon ?? variants.primary ?? variants.light ?? null;
+        variants.favicon ?? data?.icon_url ?? variants.primary ?? variants.light ?? null;
       if (remote) faviconUrl = remote;
     } catch {
       // fall back to local favicon.ico

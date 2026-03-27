@@ -28,6 +28,7 @@ export interface BrandState {
       light: string;
       dark: string;
       favicon: string;
+      icon: string | null;
       uploaded: string | null;
     };
     hero: {
@@ -150,6 +151,7 @@ function getInitialState(lang: Language): BrandState {
     assets: {
       logo: {
         ...config.assets.logo,
+        icon: null,
         uploaded: null,
       },
       hero: { ...config.assets.hero },
@@ -284,6 +286,7 @@ export function BrandProvider({ children }: { children: ReactNode }) {
               ...(primaryUrl && { light: primaryUrl }),
               ...(variants.dark && { dark: variants.dark }),
               ...(variants.favicon && { favicon: variants.favicon }),
+              ...(dbBrand.icon_url && { icon: dbBrand.icon_url }),
             },
           };
 

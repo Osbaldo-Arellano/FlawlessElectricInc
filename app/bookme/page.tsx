@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Send, Mail, Phone } from "lucide-react";
+import Image from "next/image";
+import { Send } from "lucide-react";
 import { formatPhone } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -57,12 +58,16 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-background flex items-center justify-center px-4 py-16">
       <div className="w-full max-w-lg">
-        {/* Logo / Brand name */}
-        <div className="text-center mb-8">
-          <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">
-            {brand.company.tagline}
-          </p>
-          <h1 className="text-3xl font-bold tracking-tight">{brand.company.name}</h1>
+        {/* Logo */}
+        <div className="flex justify-center mb-8">
+          <Image
+            src={brand.assets.logo.uploaded ?? brand.assets.logo.light}
+            alt={brand.company.name}
+            width={360}
+            height={120}
+            priority
+            className="h-16 w-auto object-contain"
+          />
         </div>
 
         <Card className="border-border shadow-md">
@@ -223,19 +228,31 @@ export default function ContactPage() {
         </Card>
 
         {/* Quick contact links */}
-        <div className="flex justify-center gap-6 mt-6 text-sm text-muted-foreground">
+        <div className="flex flex-wrap justify-center gap-6 mt-6 text-sm text-muted-foreground">
           <a
             href={`mailto:${brand.company.email}`}
-            className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+            className="flex items-center gap-2 hover:text-foreground transition-colors"
           >
-            <Mail className="w-4 h-4" />
+            <Image
+              src={brand.assets.logo.icon ?? brand.assets.logo.favicon ?? "/blackIcon.svg"}
+              alt=""
+              width={16}
+              height={16}
+              className="object-contain"
+            />
             {brand.company.email}
           </a>
           <a
             href={`tel:${brand.company.phone.replace(/\D/g, "")}`}
-            className="flex items-center gap-1.5 hover:text-foreground transition-colors"
+            className="flex items-center gap-2 hover:text-foreground transition-colors"
           >
-            <Phone className="w-4 h-4" />
+            <Image
+              src={brand.assets.logo.icon ?? brand.assets.logo.favicon ?? "/blackIcon.svg"}
+              alt=""
+              width={16}
+              height={16}
+              className="object-contain"
+            />
             {formatPhone(brand.company.phone)}
           </a>
         </div>
