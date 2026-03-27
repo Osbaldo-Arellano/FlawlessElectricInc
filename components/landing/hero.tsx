@@ -400,7 +400,7 @@ export function Hero() {
 
                 {/* Stats with hover glass panes */}
                 <div
-                  className="flex gap-8 transition-all duration-700 ease-out"
+                  className="flex gap-5 transition-all duration-700 ease-out"
                   style={{
                     opacity: textRevealed ? 1 : 0,
                     transform: textRevealed
@@ -413,10 +413,10 @@ export function Hero() {
                     <div key={stat.label} className="relative group/stat">
                       <div className="absolute -inset-3 rounded-lg bg-white/0 group-hover/stat:bg-white/[0.06] backdrop-blur-none group-hover/stat:backdrop-blur-sm transition-all duration-300" />
                       <div className="relative">
-                        <div className="text-2xl font-bold text-white drop-shadow-md">
+                        <div className="text-lg font-bold text-white drop-shadow-md">
                           {stat.value}
                         </div>
-                        <div className="text-xs text-white/70 uppercase tracking-wide">
+                        <div className="text-[10px] text-white/70 uppercase tracking-wide">
                           {stat.label}
                         </div>
                       </div>
@@ -500,16 +500,16 @@ export function Hero() {
 
         <div className="flex flex-row gap-3">
           {/* Stats — stacked as 3 rows */}
-          <div className="flex flex-col gap-3 shrink-0">
+          <div className="flex flex-col gap-2 shrink-0">
             {brand.hero.stats.map((stat) => (
               <div
                 key={stat.label}
-                className="flex flex-row items-center gap-2.5 rounded-lg border border-border bg-muted/50 px-3 py-1"
+                className="flex flex-row items-center gap-2 rounded-lg border border-border bg-muted/50 px-2.5 py-0.5"
               >
-                <div className="text-base font-bold leading-none">
+                <div className="text-sm font-bold leading-none">
                   {stat.value}
                 </div>
-                <div className="text-[10px] text-muted-foreground leading-none uppercase tracking-wide">
+                <div className="text-[9px] text-muted-foreground leading-none uppercase tracking-wide">
                   {stat.label}
                 </div>
               </div>

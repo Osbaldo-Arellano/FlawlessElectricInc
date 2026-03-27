@@ -64,6 +64,7 @@ export const brandConfig = {
       href: "#gallery",
     },
     stats: [
+      { value: "CCB", label: "#260637" },
       { value: "Veteran", label: "Owned" },
       { value: "IBEW", label: "Union Trained" },
       { value: "1000+", label: "Jobs Completed" },
