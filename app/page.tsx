@@ -6,6 +6,7 @@ import {
   About,
   Services,
   Gallery,
+  Certifications,
   Contact,
   Footer,
 } from "@/components/landing";
@@ -26,6 +27,8 @@ export default function Home() {
         <Services />
         <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <Gallery />
+        <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+        <Certifications />
         <div className="mx-auto w-2/3 max-w-xl h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <Contact />
       </main>
