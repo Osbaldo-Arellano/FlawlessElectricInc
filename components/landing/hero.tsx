@@ -436,7 +436,7 @@ export function Hero() {
                   transitionDelay: "800ms",
                 }}
               >
-                <div className="relative bg-white/[0.07] backdrop-blur-xl border border-white/[0.1] rounded-xl p-5 2xl:p-7 space-y-4 overflow-hidden group/card hover:border-white/[0.18] transition-colors duration-500">
+                <div className="relative bg-white/[0.07] backdrop-blur-xl border border-white/[0.1] rounded-xl p-3 sm:p-5 2xl:p-7 space-y-3 sm:space-y-4 overflow-hidden group/card hover:border-white/[0.18] transition-colors duration-500">
                   {/* Animated corner glow on hover */}
                   <div className="absolute -top-12 -right-12 w-24 h-24 bg-white/10 rounded-full blur-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
@@ -466,6 +466,27 @@ export function Hero() {
                       </Link>
                     ))}
                   </div>
+
+                  {/* Cert logos */}
+                  <Link href="#certifications" className="grid grid-cols-5 items-center gap-1 sm:gap-2 pt-2 border-t border-white/10 relative hover:border-white/20 transition-colors duration-200 cursor-pointer">
+                    {[
+                      { src: "/certs/VBE-Large.png", alt: "VBE Certified", invert: false },
+                      { src: "/certs/MBE-Large.png", alt: "MBE Certified", invert: false },
+                      { src: "/certs/Better_Business_Bureau.svg", alt: "BBB Accredited", invert: false },
+                      { src: "/certs/nietc-logo-3.webp", alt: "NIETC Certified", invert: false },
+                      { src: "/certs/TALogo_black.png", alt: "The Associated Oregon", invert: true },
+                    ].map((logo) => (
+                      <div key={logo.alt} className="flex items-center justify-center">
+                        <Image
+                          src={logo.src}
+                          alt={logo.alt}
+                          height={36}
+                          width={80}
+                          className={`h-6 sm:h-9 w-auto max-w-full object-contain opacity-80 ${logo.invert ? "brightness-0 invert" : ""}`}
+                        />
+                      </div>
+                    ))}
+                  </Link>
                 </div>
               </div>
             </div>

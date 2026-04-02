@@ -105,7 +105,7 @@ export const brandConfig = {
         description: "Our crew is IBEW union-trained, which means rigorous apprenticeship standards, ongoing education, and a commitment to safety on every job site.",
       },
       {
-        title: "Our Values",
+        title: "Veteran Values",
         description: "Hard work, honesty, and respect. We show up on time, keep a clean job site, and stand behind everything we do.",
       },
     ],
