@@ -46,9 +46,9 @@ const certifications = [
   },
   {
     logo: "/certs/TALogo_black.png",
-    title: "The Associated — Oregon",
+    title: "Trade Ally of Energy Trust of Oregon",
     description:
-      "Proud member of The Associated General Contractors of Oregon, upholding best practices, safety standards, and professional excellence across the construction industry.",
+      "Member of independent contractors and allied professionals, the Trade Ally Network has helped thousands of Oregon families and businesses achieve their financial and environmental goals",
     href: null,
     linkLabel: null,
     span: "lg:col-span-3",
@@ -75,8 +75,9 @@ export function Certifications() {
               Certified &amp; Recognized
             </h2>
             <p className="text-base lg:text-lg text-muted-foreground">
-              Flawless Electric Inc holds official state certifications that reflect
-              our ownership, values, and commitment to Oregon&apos;s contracting community.
+              Flawless Electric Inc holds official state certifications that
+              reflect our ownership, values, and commitment to Oregon&apos;s
+              contracting community.
             </p>
           </div>
         </AnimateOnScroll>
@@ -88,7 +89,11 @@ export function Certifications() {
             const isFullWidth = cert.span === "lg:col-span-3";
             const Wrapper = cert.href ? "a" : "div";
             const wrapperProps = cert.href
-              ? { href: cert.href, target: "_blank", rel: "noopener noreferrer" }
+              ? {
+                  href: cert.href,
+                  target: "_blank",
+                  rel: "noopener noreferrer",
+                }
               : {};
 
             return (
@@ -103,11 +108,12 @@ export function Certifications() {
                   {...wrapperProps}
                   className={`group relative h-full flex overflow-hidden rounded-2xl border transition-all duration-300
                     shadow-sm hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1
-                    ${isHero
-                      ? "flex-col gap-6 p-6 sm:p-8 lg:p-10 border-primary/25 bg-gradient-to-br from-primary/[0.09] via-primary/[0.04] to-transparent"
-                      : isFullWidth
-                        ? "flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-6 sm:p-8 border-primary/15 bg-gradient-to-r from-primary/[0.06] via-primary/[0.02] to-transparent"
-                        : "flex-col gap-5 p-5 sm:p-7 border-black/[0.08] dark:border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.02] dark:from-white/[0.04] dark:to-transparent"
+                    ${
+                      isHero
+                        ? "flex-col gap-6 p-6 sm:p-8 lg:p-10 border-primary/25 bg-gradient-to-br from-primary/[0.09] via-primary/[0.04] to-transparent"
+                        : isFullWidth
+                          ? "flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 p-6 sm:p-8 border-primary/15 bg-gradient-to-r from-primary/[0.06] via-primary/[0.02] to-transparent"
+                          : "flex-col gap-5 p-5 sm:p-7 border-black/[0.08] dark:border-white/[0.08] bg-gradient-to-br from-white/[0.06] to-white/[0.02] dark:from-white/[0.04] dark:to-transparent"
                     }`}
                 >
                   {/* Hover glow */}
@@ -121,7 +127,11 @@ export function Certifications() {
                   {/* Logo */}
                   <div
                     className={`relative shrink-0 ${
-                      isHero ? "h-16 w-48" : isFullWidth ? "h-12 w-40" : "h-12 w-32"
+                      isHero
+                        ? "h-16 w-48"
+                        : isFullWidth
+                          ? "h-12 w-40"
+                          : "h-12 w-32"
                     }`}
                   >
                     <Image
@@ -129,13 +139,17 @@ export function Certifications() {
                       alt={cert.title}
                       fill
                       className={`object-contain object-left transition-all duration-300 group-hover:scale-[1.03] ${
-                        cert.invert ? "brightness-0 dark:brightness-100 dark:invert-0 invert-0 dark:filter-none" : ""
+                        cert.invert
+                          ? "brightness-0 dark:brightness-100 dark:invert-0 invert-0 dark:filter-none"
+                          : ""
                       }`}
                     />
                   </div>
 
                   {/* Content */}
-                  <div className={`relative ${isFullWidth ? "flex-1 min-w-0" : "flex flex-col flex-1"}`}>
+                  <div
+                    className={`relative ${isFullWidth ? "flex-1 min-w-0" : "flex flex-col flex-1"}`}
+                  >
                     <h3
                       className={`font-semibold mb-2 transition-colors duration-300 group-hover:text-primary ${
                         isHero ? "text-xl lg:text-2xl" : "text-lg"
