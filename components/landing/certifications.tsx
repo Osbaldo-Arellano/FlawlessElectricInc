@@ -25,23 +25,13 @@ const certifications = [
     invert: false,
   },
   {
-    logo: "/certs/Better_Business_Bureau.svg",
-    title: "BBB Accredited Business",
-    description:
-      "Accredited by the Better Business Bureau — committed to honest advertising, transparency, and resolving customer concerns.",
-    href: null,
-    linkLabel: null,
-    span: "lg:col-span-1",
-    invert: false,
-  },
-  {
     logo: "/certs/nietc-logo-3.webp",
     title: "NIETC Certified",
     description:
       "Recognized by the National Institute of Electrical Testing Competency for adherence to industry standards and electrical testing excellence.",
     href: null,
     linkLabel: null,
-    span: "lg:col-span-2",
+    span: "lg:col-span-1",
     invert: false,
   },
   {
@@ -51,7 +41,7 @@ const certifications = [
       "Member of independent contractors and allied professionals, the Trade Ally Network has helped thousands of Oregon families and businesses achieve their financial and environmental goals",
     href: null,
     linkLabel: null,
-    span: "lg:col-span-3",
+    span: "lg:col-span-2",
     invert: true,
   },
 ];
@@ -86,7 +76,7 @@ export function Certifications() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
           {certifications.map((cert, index) => {
             const isHero = index === 0;
-            const isFullWidth = cert.span === "lg:col-span-3";
+            const isFullWidth = cert.span === "lg:col-span-3" || (cert.span === "lg:col-span-2" && !isHero);
             const Wrapper = cert.href ? "a" : "div";
             const wrapperProps = cert.href
               ? {

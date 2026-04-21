@@ -160,7 +160,6 @@ const jsonLd = {
     "IBEW Union Member",
     "NECA Member",
     "Veteran Owned Business",
-    "BBB Accredited",
     "Energy Trust of Oregon Ally",
   ],
   knowsAbout: [

@@ -468,11 +468,10 @@ export function Hero() {
                   </div>
 
                   {/* Cert logos */}
-                  <Link href="#certifications" className="grid grid-cols-5 items-center gap-1 sm:gap-2 pt-2 border-t border-white/10 relative hover:border-white/20 transition-colors duration-200 cursor-pointer">
+                  <Link href="#certifications" className="grid grid-cols-4 items-center gap-1 sm:gap-2 pt-2 border-t border-white/10 relative hover:border-white/20 transition-colors duration-200 cursor-pointer">
                     {[
                       { src: "/certs/VBE-Large.png", alt: "VBE Certified", invert: false },
                       { src: "/certs/MBE-Large.png", alt: "MBE Certified", invert: false },
-                      { src: "/certs/Better_Business_Bureau.svg", alt: "BBB Accredited", invert: false },
                       { src: "/certs/nietc-logo-3.webp", alt: "NIETC Certified", invert: false },
                       { src: "/certs/TALogo_black.png", alt: "The Associated Oregon", invert: true },
                     ].map((logo) => (

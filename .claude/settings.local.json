@@ -15,7 +15,8 @@
       "Bash(cmd /c \"del /F /Q D:\\\\BrandSyncV2\\\\.next\\\\dev\\\\lock\" 2>&1)",
       "Bash(cmd /c \"tasklist /FI \\\\\"PID eq 12096\\\\\" /FO LIST\" 2>&1)",
       "Bash(cmd /c \"netstat -ano | findstr :3000\" 2>&1)",
-      "Bash(cmd /c \"tasklist /FI \\\\\"IMAGENAME eq node.exe\\\\\" /FO LIST\" 2>&1)"
+      "Bash(cmd /c \"tasklist /FI \\\\\"IMAGENAME eq node.exe\\\\\" /FO LIST\" 2>&1)",
+      "Bash(xargs grep *)"
     ]
   }
 }

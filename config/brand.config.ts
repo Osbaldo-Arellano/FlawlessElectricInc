@@ -29,7 +29,6 @@ export const brandConfig = {
       { name: "NECA", url: "/neca.png" },
       { name: "Oregon CCB", url: "/ccb.png" },
       { name: "Energy Trust of Oregon", url: "/energytrust.png" },
-      { name: "BBB Accredited", url: "/bbb.png" },
     ],
   },
 
@@ -85,7 +84,7 @@ export const brandConfig = {
   // ============================================
   trustBar: {
     headline: "Trusted by homeowners across the PNW",
-    credentials: ["Oregon CCB #260637", "Veteran Owned", "IBEW", "NECA", "BBB Accredited", "Energy Trust of Oregon"],
+    credentials: ["Oregon CCB #260637", "Veteran Owned", "IBEW", "NECA", "Energy Trust of Oregon"],
   },
 
   // ============================================
