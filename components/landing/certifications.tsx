@@ -13,6 +13,7 @@ const certifications = [
     linkLabel: "Learn more at oregon.gov",
     span: "lg:col-span-2",
     invert: false,
+    solidBg: false,
   },
   {
     logo: "/certs/MBE-Large.png",
@@ -23,6 +24,7 @@ const certifications = [
     linkLabel: "Learn more at oregon.gov",
     span: "lg:col-span-1",
     invert: false,
+    solidBg: false,
   },
   {
     logo: "/certs/nietc-logo-3.webp",
@@ -33,6 +35,7 @@ const certifications = [
     linkLabel: null,
     span: "lg:col-span-1",
     invert: false,
+    solidBg: false,
   },
   {
     logo: "/certs/TALogo_black.png",
@@ -42,7 +45,8 @@ const certifications = [
     href: "https://www.energytrust.org/",
     linkLabel: "Visit energytrust.org",
     span: "lg:col-span-2",
-    invert: true,
+    invert: false,
+    solidBg: true,
   },
 ];
 
@@ -115,25 +119,27 @@ export function Certifications() {
                   )}
 
                   {/* Logo */}
-                  <div
-                    className={`relative shrink-0 ${
-                      isHero
-                        ? "h-16 w-48"
-                        : isFullWidth
-                          ? "h-12 w-40"
-                          : "h-12 w-32"
-                    }`}
-                  >
-                    <Image
-                      src={cert.logo}
-                      alt={cert.title}
-                      fill
-                      className={`object-contain object-left transition-all duration-300 group-hover:scale-[1.03] ${
-                        cert.invert
-                          ? "brightness-0 dark:brightness-100 dark:invert-0 invert-0 dark:filter-none"
-                          : ""
+                  <div className={`shrink-0 ${cert.solidBg ? "bg-white rounded-lg p-2 flex items-center" : ""}`}>
+                    <div
+                      className={`relative ${
+                        isHero
+                          ? "h-16 w-48"
+                          : isFullWidth
+                            ? "h-12 w-40"
+                            : "h-12 w-32"
                       }`}
-                    />
+                    >
+                      <Image
+                        src={cert.logo}
+                        alt={cert.title}
+                        fill
+                        className={`object-contain object-left transition-all duration-300 group-hover:scale-[1.03] ${
+                          cert.invert
+                            ? "brightness-0 dark:brightness-100 dark:invert-0 invert-0 dark:filter-none"
+                            : ""
+                        }`}
+                      />
+                    </div>
                   </div>
 
                   {/* Content */}

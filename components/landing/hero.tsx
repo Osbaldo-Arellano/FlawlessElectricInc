@@ -468,14 +468,15 @@ export function Hero() {
                   </div>
 
                   {/* Cert logos */}
-                  <Link href="#certifications" className="grid grid-cols-4 items-center gap-1 sm:gap-2 pt-2 border-t border-white/10 relative hover:border-white/20 transition-colors duration-200 cursor-pointer">
+                  <div className="grid grid-cols-4 items-center gap-1 sm:gap-2 pt-2 border-t border-white/10 relative">
                     {[
-                      { src: "/certs/VBE-Large.png", alt: "VBE Certified", invert: false },
-                      { src: "/certs/MBE-Large.png", alt: "MBE Certified", invert: false },
-                      { src: "/certs/nietc-logo-3.webp", alt: "NIETC Certified", invert: false },
-                      { src: "/certs/TALogo_black.png", alt: "The Associated Oregon", invert: true },
-                    ].map((logo) => (
-                      <div key={logo.alt} className="flex items-center justify-center">
+                      { src: "/certs/VBE-Large.png", alt: "VBE Certified", invert: false, href: "#certifications" as string },
+                      { src: "/certs/MBE-Large.png", alt: "MBE Certified", invert: false, href: "#certifications" as string },
+                      { src: "/certs/nietc-logo-3.webp", alt: "NIETC Certified", invert: false, href: "#certifications" as string },
+                      { src: "/certs/TALogo_black.png", alt: "Energy Trust Trade Ally", invert: false, href: "https://www.energytrust.org/" as string },
+                    ].map((logo) => {
+                      const isExternal = logo.href.startsWith("http");
+                      const img = (
                         <Image
                           src={logo.src}
                           alt={logo.alt}
@@ -483,9 +484,22 @@ export function Hero() {
                           width={80}
                           className={`h-6 sm:h-9 w-auto max-w-full object-contain opacity-80 ${logo.invert ? "brightness-0 invert" : ""}`}
                         />
-                      </div>
-                    ))}
-                  </Link>
+                      );
+                      return (
+                      <a
+                        key={logo.alt}
+                        href={logo.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        className="flex items-center justify-center hover:opacity-100 transition-opacity duration-200"
+                      >
+                        {isExternal ? (
+                          <div className="bg-white rounded p-1 flex items-center">{img}</div>
+                        ) : img}
+                      </a>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
