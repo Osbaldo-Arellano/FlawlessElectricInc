@@ -38,9 +38,9 @@ const certifications = [
     logo: "/certs/TALogo_black.png",
     title: "Trade Ally of Energy Trust of Oregon",
     description:
-      "Member of independent contractors and allied professionals, the Trade Ally Network has helped thousands of Oregon families and businesses achieve their financial and environmental goals",
-    href: null,
-    linkLabel: null,
+      "As an approved trade ally contractor of Energy Trust of Oregon, we are qualified to improve the energy efficiency and comfort of your home.",
+    href: "https://www.energytrust.org/",
+    linkLabel: "Visit energytrust.org",
     span: "lg:col-span-2",
     invert: true,
   },
