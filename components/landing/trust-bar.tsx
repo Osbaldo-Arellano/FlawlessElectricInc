@@ -113,7 +113,7 @@ export function TrustBar() {
                       </span>
                     )}
                     {isLast ? (
-                      <span className="text-primary/70 font-semibold normal-case tracking-wide">
+                      <span className="text-sm sm:text-base text-primary/70 font-semibold normal-case tracking-wide whitespace-nowrap">
                         {brand.trustBar.credentials[gi]}
                       </span>
                     ) : (
