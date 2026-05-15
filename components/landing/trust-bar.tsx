@@ -21,8 +21,7 @@ export function TrustBar() {
     });
   }, [brand.trustBar.credentials]);
 
-  // Last credential is rendered static — exclude it from the animated letter count
-  const totalLetters = credGroups.slice(0, -1).reduce(
+  const totalLetters = credGroups.reduce(
     (sum, g) => sum + g.filter((c) => !c.isSpace).length,
     0,
   );
@@ -101,44 +100,37 @@ export function TrustBar() {
 
             <div className="relative flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-y-2 sm:gap-y-2 text-4xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight">
               {credGroups.map((group, gi) => {
-                const isLast = gi === credGroups.length - 1;
                 return (
                   <span
                     key={gi}
-                    className={`flex items-center ${isLast ? "-order-1 sm:order-none" : ""}`}
+                    className="flex items-center"
                   >
                     {gi > 0 && (
                       <span className="hidden sm:inline text-muted-foreground/20 mx-1 sm:mx-2">
                         ·
                       </span>
                     )}
-                    {isLast ? (
-                      <span className="text-sm sm:text-base text-primary/70 font-semibold normal-case tracking-wide whitespace-nowrap">
-                        {brand.trustBar.credentials[gi]}
-                      </span>
-                    ) : (
-                      group.map((c, ci) => {
-                        if (c.isSpace) {
-                          return (
-                            <span key={ci} className="inline-block w-[0.3em]" />
-                          );
-                        }
-                        const isRevealed = letterIndex < revealedCount;
-                        letterIndex++;
+                    {group.map((c, ci) => {
+                      if (c.isSpace) {
                         return (
-                          <span
-                            key={ci}
-                            className={`inline-block transition-all duration-150 ${
-                              isRevealed
-                                ? "text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]"
-                                : "text-muted-foreground/20"
-                            }`}
-                          >
-                            {c.char}
-                          </span>
+                          <span key={ci} className="inline-block w-[0.3em]" />
                         );
-                      })
-                    )}
+                      }
+                      const isRevealed = letterIndex < revealedCount;
+                      letterIndex++;
+                      return (
+                        <span
+                          key={ci}
+                          className={`inline-block transition-all duration-150 ${
+                            isRevealed
+                              ? "text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-primary drop-shadow-[0_0_6px_hsl(var(--primary)/0.4)]"
+                              : "text-muted-foreground/20"
+                          }`}
+                        >
+                          {c.char}
+                        </span>
+                      );
+                    })}
                   </span>
                 );
               })}

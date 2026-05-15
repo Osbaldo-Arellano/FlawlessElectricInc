@@ -83,8 +83,8 @@ export const brandConfig = {
   // TRUST BAR
   // ============================================
   trustBar: {
-    headline: "Trusted by homeowners across the PNW",
-    credentials: ["Oregon CCB #260637", "Veteran Owned", "IBEW", "NECA", "Trade Ally of Energy Trust of Oregon"],
+    headline: "Trade Ally of Energy Trust of Oregon",
+    credentials: ["Oregon CCB #260637", "Veteran Owned", "IBEW", "NECA"],
   },
 
   // ============================================
